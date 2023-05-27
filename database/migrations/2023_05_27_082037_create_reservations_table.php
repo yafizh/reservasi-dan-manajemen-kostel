@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('name');
             $table->string('phone_number', 20);
             $table->boolean('sex');
+            $table->unsignedBigInteger('down_payment');
             $table->timestamp('reservation_datetime');
             $table->timestamp('check_in_datetime');
             $table->timestamps();

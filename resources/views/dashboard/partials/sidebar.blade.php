@@ -33,7 +33,11 @@
                 <li class="nav-item">
                     <a href="/room-types" @class([
                         'nav-link',
-                        'active' => request()->segment(1) == 'room-types',
+                        'active' =>
+                            request()->segment(1) == 'room-types' &&
+                            (request()->segment(2) !== 'rooms' ||
+                                request()->segment(3) === 'show' ||
+                                request()->segment(3) === 'edit'),
                     ])>
                         <i class="nav-icon far fa-image"></i>
                         <p>
@@ -42,7 +46,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="/rooms" @class(['nav-link', 'active' => request()->segment(1) == 'rooms'])>
+                    <a href="/room-types/rooms" @class(['nav-link', 'active' => request()->segment(2) == 'rooms'])>
                         <i class="nav-icon far fa-image"></i>
                         <p>
                             Kamar
@@ -85,10 +89,7 @@
                     'nav-item',
                     'menu-open' => request()->segment(1) === 'report',
                 ])>
-                    <a href="#" @class([
-                        'nav-link',
-                        'active' => request()->segment(1) === 'report',
-                    ])>
+                    <a href="#" @class(['nav-link', 'active' => request()->segment(1) === 'report'])>
                         <i class="nav-icon fas fa-tachometer-alt"></i>
                         <p>
                             Laporan
@@ -106,10 +107,7 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="/report/check-ins" @class([
-                                'nav-link',
-                                'active' => request()->segment(2) == 'check-ins',
-                            ])>
+                            <a href="/report/check-ins" @class(['nav-link', 'active' => request()->segment(2) == 'check-ins'])>
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Check In</p>
                             </a>

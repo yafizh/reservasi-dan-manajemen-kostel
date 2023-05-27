@@ -5,7 +5,13 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1 class="m-0">Check In</h1>
+                    <h1 class="m-0">Kamar</h1>
+                </div>
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item"><a href="/{{ request()->segment(1) }}">Tipe Kamar</a></li>
+                        <li class="breadcrumb-item active">Kamar</li>
+                    </ol>
                 </div>
             </div>
         </div>
@@ -16,17 +22,13 @@
             <div class="row">
                 <div class="col-12">
                     <div class="card">
-                        <div class="card-body" data-route="check-ins">
+                        <div class="card-body" data-route="rooms">
                             <table id="example2" class="table table-bordered table-hover">
                                 <thead>
                                     <tr>
                                         <th class="td-fit text-center">No</th>
-                                        <th class="text-center">Tanggal Check In</th>
                                         <th class="text-center">Kode Kamar</th>
-                                        <th class="text-center">Lama Tinggal</th>
-                                        <th class="text-center">Tersisa</th>
-                                        <th class="text-center">NIK Penghuni</th>
-                                        <th class="text-center">Nama Penghuni</th>
+                                        <th class="text-center">Status</th>
                                         <th class="td-fit text-center">Aksi</th>
                                     </tr>
                                 </thead>

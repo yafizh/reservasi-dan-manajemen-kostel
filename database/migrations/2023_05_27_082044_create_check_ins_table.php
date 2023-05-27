@@ -12,6 +12,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('user_id');
             $table->foreignId('room_id');
+            $table->foreignId('reservation_type_id');
             $table->string('id_number', 20);
             $table->string('name');
             $table->string('phone_number', 20);
