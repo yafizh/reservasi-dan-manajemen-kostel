@@ -9,12 +9,13 @@ class RoomController extends Controller
 {
     public function index()
     {
-        return view('dashboard.pages.room.index');
+        $rooms = [];
+        return view('dashboard.pages.room-type.room.index', compact('rooms'));
     }
 
     public function create()
     {
-        //
+        return view('dashboard.pages.room-type.room.create');
     }
 
     public function store(Request $request)

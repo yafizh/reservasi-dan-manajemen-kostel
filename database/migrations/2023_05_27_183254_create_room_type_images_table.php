@@ -8,17 +8,17 @@ return new class extends Migration
 {
     public function up(): void
     {
-        Schema::create('room_images', function (Blueprint $table) {
+        Schema::create('room_type_images', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('room_id');
+            $table->foreignId('room_type_id');
             $table->string('filename');
-            $table->string('original_filename');
+            $table->string('filename_original');
             $table->timestamps();
         });
     }
 
     public function down(): void
     {
-        Schema::dropIfExists('room_images');
+        Schema::dropIfExists('room_type_images');
     }
 };

@@ -17,7 +17,7 @@ Route::get('/', function () {
 Route::resource('/admin', AdminController::class);
 Route::resource('/employees', EmployeeController::class);
 Route::resource('/check-ins', CheckInController::class);
-Route::resource('/check-outs', CheckOutController::class);
+Route::resource('/check-outs', CheckOutController::class)->except('create');
 Route::resource('/reservations', ReservationController::class);
 
 Route::prefix('/room-types')->group(function () {

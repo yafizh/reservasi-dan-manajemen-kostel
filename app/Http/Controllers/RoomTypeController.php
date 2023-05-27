@@ -14,7 +14,7 @@ class RoomTypeController extends Controller
 
     public function create()
     {
-        //
+        return view('dashboard.pages.room-type.create');
     }
 
     public function store(Request $request)

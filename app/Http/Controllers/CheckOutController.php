@@ -12,11 +12,6 @@ class CheckOutController extends Controller
         return view('dashboard.pages.check-out.index');
     }
 
-    public function create()
-    {
-        //
-    }
-
     public function store(Request $request)
     {
         //

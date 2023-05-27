@@ -14,7 +14,7 @@ class ReservationController extends Controller
 
     public function create()
     {
-        //
+        return view('dashboard.pages.reservation.create');
     }
 
     public function store(Request $request)

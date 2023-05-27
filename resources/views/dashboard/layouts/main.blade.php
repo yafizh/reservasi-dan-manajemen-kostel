@@ -31,6 +31,10 @@
     <link rel="stylesheet" href="/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
     <link rel="stylesheet" href="/plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
     <link rel="stylesheet" href="/plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
+
+    <link href="https://unpkg.com/filepond@^4/dist/filepond.css" rel="stylesheet" />
+    <link href="https://unpkg.com/filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css"
+        rel="stylesheet" />
     <style>
         .td-fit {
             width: 1%;
@@ -101,7 +105,6 @@
     <script src="/plugins/datatables-buttons/js/buttons.html5.min.js"></script>
     <script src="/plugins/datatables-buttons/js/buttons.print.min.js"></script>
     <script src="/plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
-
     <script>
         $(function() {
             $('#example1').DataTable({
@@ -125,7 +128,8 @@
                     "buttons": [{
                         "text": 'Tambah',
                         "action": function(e, dt, node, config) {
-                            const route = node.parent().parent().parent().parent().parent().data('route');
+                            const route = node.parent().parent().parent().parent().parent()
+                                .data('route');
                             window.location.href = `/${route}/create`;
                         }
                     }, ],
@@ -146,6 +150,18 @@
                 "responsive": true,
             });
         });
+    </script>
+    <script>
+        $(function() {
+            // Summernote
+            $('#summernote').summernote()
+
+            // CodeMirror
+            CodeMirror.fromTextArea(document.getElementById("codeMirrorDemo"), {
+                mode: "htmlmixed",
+                theme: "monokai"
+            });
+        })
     </script>
 </body>
 

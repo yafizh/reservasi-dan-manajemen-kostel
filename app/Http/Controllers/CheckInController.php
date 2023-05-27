@@ -14,7 +14,7 @@ class CheckInController extends Controller
 
     public function create()
     {
-        // 
+        return view('dashboard.pages.check-in.create');
     }
 
     public function store(Request $request)

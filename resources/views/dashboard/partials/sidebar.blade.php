@@ -35,9 +35,13 @@
                         'nav-link',
                         'active' =>
                             request()->segment(1) == 'room-types' &&
-                            (request()->segment(2) !== 'rooms' ||
-                                request()->segment(3) === 'show' ||
-                                request()->segment(3) === 'edit'),
+                            (request()->segment(2) !== 'rooms' &&
+                                (
+                                    request()->segment(2) === 'create' ||
+                                    request()->segment(3) === 'show' ||
+                                    request()->segment(3) === 'edit'
+                                )
+                            ),
                     ])>
                         <i class="nav-icon far fa-image"></i>
                         <p>
@@ -46,7 +50,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="/room-types/rooms" @class(['nav-link', 'active' => request()->segment(2) == 'rooms'])>
+                    <a href="/room-types/rooms" @class(['nav-link', 'active' => request()->segment(3) == 'rooms'])>
                         <i class="nav-icon far fa-image"></i>
                         <p>
                             Kamar
