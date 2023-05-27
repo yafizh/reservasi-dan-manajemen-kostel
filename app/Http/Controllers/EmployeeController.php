@@ -2,14 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\User;
+use App\Models\Employee;
 use Illuminate\Http\Request;
 
-class AdminController extends Controller
+class EmployeeController extends Controller
 {
     public function index()
     {
-        return view('dashboard.pages.admin.index');
+        return view('dashboard.pages.employee.index');
     }
 
     public function create()
@@ -22,22 +22,22 @@ class AdminController extends Controller
         //
     }
 
-    public function show(User $user)
+    public function show(Employee $employee)
     {
         //
     }
 
-    public function edit(User $user)
+    public function edit(Employee $employee)
     {
         //
     }
 
-    public function update(Request $request, User $user)
+    public function update(Request $request, Employee $employee)
     {
         //
     }
 
-    public function destroy(User $user)
+    public function destroy(Employee $employee)
     {
         //
     }

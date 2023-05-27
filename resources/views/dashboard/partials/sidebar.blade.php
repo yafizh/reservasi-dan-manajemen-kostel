@@ -1,23 +1,20 @@
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
-    <!-- Sidebar -->
     <div class="sidebar">
-        <!-- Sidebar user panel (optional) -->
         <div class="user-panel mt-3 pb-3 mb-3 d-flex">
             <div class="image">
-                <img src="dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
+                <img src="/dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
             </div>
             <div class="info">
                 <a href="#" class="d-block">Alexander Pierce</a>
             </div>
         </div>
 
-        <!-- Sidebar Menu -->
         <nav class="mt-2">
             <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu"
                 data-accordion="false">
                 <li class="nav-header">MENU USER</li>
                 <li class="nav-item">
-                    <a href="/admin" class="nav-link">
+                    <a href="/admin" @class(['nav-link', 'active' => request()->segment(1) == 'admin'])>
                         <i class="nav-icon far fa-image"></i>
                         <p>
                             Admin
@@ -25,7 +22,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="/employees" class="nav-link">
+                    <a href="/employees" @class(['nav-link', 'active' => request()->segment(1) == 'employees'])>
                         <i class="nav-icon far fa-image"></i>
                         <p>
                             Pegawai
@@ -34,7 +31,10 @@
                 </li>
                 <li class="nav-header">MENU KAMAR</li>
                 <li class="nav-item">
-                    <a href="/room-types" class="nav-link">
+                    <a href="/room-types" @class([
+                        'nav-link',
+                        'active' => request()->segment(1) == 'room-types',
+                    ])>
                         <i class="nav-icon far fa-image"></i>
                         <p>
                             Tipe Kamar
@@ -42,7 +42,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="/rooms" class="nav-link">
+                    <a href="/rooms" @class(['nav-link', 'active' => request()->segment(1) == 'rooms'])>
                         <i class="nav-icon far fa-image"></i>
                         <p>
                             Kamar
@@ -51,7 +51,10 @@
                 </li>
                 <li class="nav-header">MENU PEMESANAN KAMAR</li>
                 <li class="nav-item">
-                    <a href="/reservations" class="nav-link">
+                    <a href="/reservations" @class([
+                        'nav-link',
+                        'active' => request()->segment(1) == 'reservations',
+                    ])>
                         <i class="nav-icon far fa-image"></i>
                         <p>
                             Pemesanan
@@ -59,7 +62,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="/check-ins" class="nav-link">
+                    <a href="/check-ins" @class(['nav-link', 'active' => request()->segment(1) == 'check-ins'])>
                         <i class="nav-icon far fa-image"></i>
                         <p>
                             Check In
@@ -67,7 +70,10 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="/check-outs" class="nav-link">
+                    <a href="/check-outs" @class([
+                        'nav-link',
+                        'active' => request()->segment(1) == 'check-outs',
+                    ])>
                         <i class="nav-icon far fa-image"></i>
                         <p>
                             Check Out
@@ -75,8 +81,14 @@
                     </a>
                 </li>
                 <li class="nav-header">MENU LAPORAN</li>
-                <li class="nav-item">
-                    <a href="#" class="nav-link">
+                <li @class([
+                    'nav-item',
+                    'menu-open' => request()->segment(1) === 'report',
+                ])>
+                    <a href="#" @class([
+                        'nav-link',
+                        'active' => request()->segment(1) === 'report',
+                    ])>
                         <i class="nav-icon fas fa-tachometer-alt"></i>
                         <p>
                             Laporan
@@ -85,37 +97,55 @@
                     </a>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            <a href="/report/reservations" class="nav-link">
+                            <a href="/report/reservations" @class([
+                                'nav-link',
+                                'active' => request()->segment(2) == 'reservations',
+                            ])>
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Pemesanan</p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="/report/check-ins" class="nav-link">
+                            <a href="/report/check-ins" @class([
+                                'nav-link',
+                                'active' => request()->segment(2) == 'check-ins',
+                            ])>
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Check In</p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="/report/check-outs" class="nav-link">
+                            <a href="/report/check-outs" @class([
+                                'nav-link',
+                                'active' => request()->segment(2) == 'check-outs',
+                            ])>
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Check Out</p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="/report/room-availables" class="nav-link">
+                            <a href="/report/available-rooms" @class([
+                                'nav-link',
+                                'active' => request()->segment(2) == 'available-rooms',
+                            ])>
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Ketersediaan Kamar</p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="/report/reservation-chart" class="nav-link">
+                            <a href="/report/reservation-chart" @class([
+                                'nav-link',
+                                'active' => request()->segment(2) == 'reservation-chart',
+                            ])>
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Grafik Pemesanan</p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="/check-in-chart" class="nav-link">
+                            <a href="/report/check-in-chart" @class([
+                                'nav-link',
+                                'active' => request()->segment(2) == 'check-in-chart',
+                            ])>
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Grafik Check In</p>
                             </a>

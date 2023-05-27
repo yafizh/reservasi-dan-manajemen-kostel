@@ -2,14 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\User;
+use App\Models\CheckOut;
 use Illuminate\Http\Request;
 
-class AdminController extends Controller
+class CheckOutController extends Controller
 {
     public function index()
     {
-        return view('dashboard.pages.admin.index');
+        return view('dashboard.pages.check-out.index');
     }
 
     public function create()
@@ -22,22 +22,22 @@ class AdminController extends Controller
         //
     }
 
-    public function show(User $user)
+    public function show(CheckOut $checkOut)
     {
         //
     }
 
-    public function edit(User $user)
+    public function edit(CheckOut $checkOut)
     {
         //
     }
 
-    public function update(Request $request, User $user)
+    public function update(Request $request, CheckOut $checkOut)
     {
         //
     }
 
-    public function destroy(User $user)
+    public function destroy(CheckOut $checkOut)
     {
         //
     }

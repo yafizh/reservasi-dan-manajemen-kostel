@@ -2,14 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\User;
+use App\Models\Room;
 use Illuminate\Http\Request;
 
-class AdminController extends Controller
+class RoomController extends Controller
 {
     public function index()
     {
-        return view('dashboard.pages.admin.index');
+        return view('dashboard.pages.room.index');
     }
 
     public function create()
@@ -22,22 +22,22 @@ class AdminController extends Controller
         //
     }
 
-    public function show(User $user)
+    public function show(Room $room)
     {
         //
     }
 
-    public function edit(User $user)
+    public function edit(Room $room)
     {
         //
     }
 
-    public function update(Request $request, User $user)
+    public function update(Request $request, Room $room)
     {
         //
     }
 
-    public function destroy(User $user)
+    public function destroy(Room $room)
     {
         //
     }
