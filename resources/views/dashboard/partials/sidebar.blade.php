@@ -15,7 +15,7 @@
                 <li class="nav-header">MENU USER</li>
                 <li class="nav-item">
                     <a href="/admin" @class(['nav-link', 'active' => request()->segment(1) == 'admin'])>
-                        <i class="nav-icon far fa-image"></i>
+                        <i class="nav-icon fas fa-user"></i>
                         <p>
                             Admin
                         </p>
@@ -23,7 +23,7 @@
                 </li>
                 <li class="nav-item">
                     <a href="/employees" @class(['nav-link', 'active' => request()->segment(1) == 'employees'])>
-                        <i class="nav-icon far fa-image"></i>
+                        <i class="nav-icon fas fa-user-tie"></i>
                         <p>
                             Pegawai
                         </p>
@@ -36,14 +36,11 @@
                         'active' =>
                             request()->segment(1) == 'room-types' &&
                             (request()->segment(2) !== 'rooms' &&
-                                (
-                                    request()->segment(2) === 'create' ||
+                                (request()->segment(2) === 'create' ||
                                     request()->segment(3) === 'show' ||
-                                    request()->segment(3) === 'edit'
-                                )
-                            ),
+                                    request()->segment(3) === 'edit')),
                     ])>
-                        <i class="nav-icon far fa-image"></i>
+                        <i class="nav-icon fas fa-th-list"></i>
                         <p>
                             Tipe Kamar
                         </p>
@@ -51,7 +48,7 @@
                 </li>
                 <li class="nav-item">
                     <a href="/room-types/rooms" @class(['nav-link', 'active' => request()->segment(3) == 'rooms'])>
-                        <i class="nav-icon far fa-image"></i>
+                        <i class="nav-icon fas fa-warehouse"></i>
                         <p>
                             Kamar
                         </p>
@@ -63,7 +60,7 @@
                         'nav-link',
                         'active' => request()->segment(1) == 'reservations',
                     ])>
-                        <i class="nav-icon far fa-image"></i>
+                        <i class="nav-icon far fa-calendar-alt"></i>
                         <p>
                             Pemesanan
                         </p>
@@ -71,7 +68,7 @@
                 </li>
                 <li class="nav-item">
                     <a href="/check-ins" @class(['nav-link', 'active' => request()->segment(1) == 'check-ins'])>
-                        <i class="nav-icon far fa-image"></i>
+                        <i class="nav-icon far fa-calendar-check"></i>
                         <p>
                             Check In
                         </p>
@@ -82,7 +79,7 @@
                         'nav-link',
                         'active' => request()->segment(1) == 'check-outs',
                     ])>
-                        <i class="nav-icon far fa-image"></i>
+                        <i class="nav-icon far fa-calendar-minus"></i>
                         <p>
                             Check Out
                         </p>
@@ -94,7 +91,7 @@
                     'menu-open' => request()->segment(1) === 'report',
                 ])>
                     <a href="#" @class(['nav-link', 'active' => request()->segment(1) === 'report'])>
-                        <i class="nav-icon fas fa-tachometer-alt"></i>
+                        <i class="nav-icon far fa-file-pdf"></i>
                         <p>
                             Laporan
                             <i class="right fas fa-angle-left"></i>
