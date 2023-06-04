@@ -36,7 +36,9 @@
                         'active' =>
                             request()->segment(1) == 'room-types' &&
                             (request()->segment(2) !== 'rooms' &&
-                                (request()->segment(2) === 'create' ||
+                                (
+                                    request()->segment(2) === null ||
+                                    request()->segment(2) === 'create' ||
                                     request()->segment(3) === 'show' ||
                                     request()->segment(3) === 'edit')),
                     ])>

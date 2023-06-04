@@ -10,7 +10,8 @@ return new class extends Migration
     {
         Schema::create('rooms', function (Blueprint $table) {
             $table->id();
-            $table->string('code', 20);
+            $table->foreignId('room_type_id');
+            $table->unsignedSmallInteger('number');
             $table->unsignedTinyInteger('status');
             $table->timestamps();
         });

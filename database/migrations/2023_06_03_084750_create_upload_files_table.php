@@ -8,17 +8,16 @@ return new class extends Migration
 {
     public function up(): void
     {
-        Schema::create('room_types', function (Blueprint $table) {
+        Schema::create('upload_files', function (Blueprint $table) {
             $table->id();
-            $table->string('name', 20);
-            $table->text('facilities');
-            $table->unsignedSmallInteger('order');
+            $table->string('filename');
+            $table->string('filename_original');
             $table->timestamps();
         });
     }
 
     public function down(): void
     {
-        Schema::dropIfExists('room_types');
+        Schema::dropIfExists('upload_files');
     }
 };

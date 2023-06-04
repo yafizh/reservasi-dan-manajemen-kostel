@@ -12,7 +12,8 @@ return new class extends Migration
             $table->foreignId('room_type_id');
             $table->foreignId('reservation_type_id');
             $table->index(['room_type_id', 'reservation_type_id']);
-            $table->unique('room_type_id', 'reservation_type_id');
+            $table->unique(['room_type_id', 'reservation_type_id']);
+            $table->unsignedBigInteger('price');
             $table->timestamps();
         });
     }

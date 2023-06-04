@@ -8,6 +8,7 @@ use App\Http\Controllers\ReportController;
 use App\Http\Controllers\ReservationController;
 use App\Http\Controllers\RoomController;
 use App\Http\Controllers\RoomTypeController;
+use App\Http\Controllers\UploadFileController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -21,6 +22,8 @@ Route::resource('/check-outs', CheckOutController::class)->except('create');
 Route::resource('/reservations', ReservationController::class);
 
 Route::prefix('/room-types')->group(function () {
+    Route::post('uploads/process', [UploadFileController::class, 'process']);
+    
     Route::get('/rooms', [RoomTypeController::class, 'index']);
     Route::resource('/{roomType}/rooms', RoomController::class);
 });
