@@ -15,6 +15,13 @@
         <div class="container-fluid">
             <div class="row justify-content-center">
                 <div class="col-12 col-md-6">
+                    @if ($errors->any())
+                        @foreach ($errors->all() as $error)
+                            <div class="alert alert-danger" role="alert">
+                                {{ $error }}
+                            </div>
+                        @endforeach
+                    @endif
                     <div class="card">
                         <form action="/room-types/{{ $roomType->id }}/rooms" method="POST">
                             @csrf

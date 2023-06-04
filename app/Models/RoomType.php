@@ -25,4 +25,9 @@ class RoomType extends Model
     {
         return $this->hasMany(Room::class);
     }
+
+    public function availableRooms()
+    {
+        return $this->hasMany(Room::class)->where('status', 1);
+    }
 }

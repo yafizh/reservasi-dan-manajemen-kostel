@@ -15,6 +15,11 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-12">
+                    @if (session('success'))
+                        <div class="alert alert-success" role="alert">
+                            {{ session('success') }}
+                        </div>
+                    @endif
                     <div class="card">
                         <div class="card-body" data-route="reservations">
                             <table id="example2" class="table table-bordered table-hover">
@@ -26,11 +31,32 @@
                                         <th class="text-center">NIK</th>
                                         <th class="text-center">Nama</th>
                                         <th class="text-center">Nomor Telepon</th>
-                                        <th class="text-center">Jenis Kelamin</th>
                                         <th class="td-fit text-center">Aksi</th>
                                     </tr>
                                 </thead>
                                 <tbody>
+                                    @foreach ($reservations as $reservation)
+                                        <tr>
+                                            <td class="text-center">{{ $loop->iteration }}</td>
+                                            <td class="text-center">{{ $reservation->reservation_date }}</td>
+                                            <td class="text-center">{{ $reservation->check_in_date }}</td>
+                                            <td class="text-center">{{ $reservation->id_number }}</td>
+                                            <td class="text-center">{{ $reservation->name }}</td>
+                                            <td class="text-center">{{ $reservation->phone_number }}</td>
+                                            <td>
+                                                <div class="td-fit d-flex">
+                                                    <a href="/reservations/{{ $reservation->id }}/edit"
+                                                        class="btn btn-warning btn-sm mr-1">Ubah</a>
+                                                    <form action="/reservations/{{ $reservation->id }}" method="POST">
+                                                        @csrf
+                                                        @method('DELETE')
+                                                        <button type="submit"
+                                                            class="btn btn-danger btn-sm ml-1">Hapus</button>
+                                                    </form>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    @endforeach
                                 </tbody>
                             </table>
                         </div>

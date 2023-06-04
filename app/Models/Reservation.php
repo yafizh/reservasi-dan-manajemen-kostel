@@ -8,4 +8,11 @@ use Illuminate\Database\Eloquent\Model;
 class Reservation extends Model
 {
     use HasFactory;
+
+    protected $guarded = ['id'];
+
+    public function checkIn()
+    {
+        return $this->hasOneThrough(CheckIn::class, ReservationCheckIn::class, null, 'id', null, 'check_in_id');
+    }
 }

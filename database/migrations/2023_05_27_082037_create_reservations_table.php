@@ -10,15 +10,14 @@ return new class extends Migration
     {
         Schema::create('reservations', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id');
+            $table->foreignId('user_id')->nullable();
             $table->foreignId('room_id');
             $table->string('id_number', 20);
             $table->string('name');
             $table->string('phone_number', 20);
-            $table->boolean('sex');
             $table->unsignedBigInteger('down_payment');
             $table->timestamp('reservation_datetime');
-            $table->timestamp('check_in_datetime');
+            $table->date('check_in_date');
             $table->timestamps();
         });
     }

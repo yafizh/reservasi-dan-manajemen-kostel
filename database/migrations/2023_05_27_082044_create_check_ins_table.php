@@ -10,7 +10,7 @@ return new class extends Migration
     {
         Schema::create('check_ins', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id');
+            $table->foreignId('user_id')->nullable();
             $table->foreignId('room_id');
             $table->foreignId('reservation_type_id');
             $table->string('id_number', 20);

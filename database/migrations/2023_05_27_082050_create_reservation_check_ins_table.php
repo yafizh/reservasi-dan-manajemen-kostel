@@ -12,7 +12,7 @@ return new class extends Migration
             $table->foreignId('reservation_id');
             $table->foreignId('check_in_id');
             $table->index(['reservation_id', 'check_in_id']);
-            $table->unique('reservation_id', 'check_in_id');
+            $table->unique(['reservation_id', 'check_in_id']);
             $table->timestamps();
         });
     }
