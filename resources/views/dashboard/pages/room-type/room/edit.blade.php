@@ -5,7 +5,7 @@
         <div class="container-fluid">
             <div class="row mb-2 justify-content-center text-center">
                 <div class="col-sm-6">
-                    <h1 class="m-0">Tambah Kamar</h1>
+                    <h1 class="m-0">Ubah Kamar</h1>
                 </div>
             </div>
         </div>
@@ -16,18 +16,19 @@
             <div class="row justify-content-center">
                 <div class="col-12 col-md-6">
                     <div class="card">
-                        <form action="/room-types/{{ $roomType->id }}/rooms" method="POST">
+                        <form action="/room-types/{{ $roomType->id }}/rooms/{{ $room->id }}" method="POST">
                             @csrf
+                            @method('PUT')
                             <div class="card-body">
                                 <div class="form-group">
                                     <label for="number">Nomor Kamar</label>
                                     <input type="number" class="form-control" id="number" name="number" required
-                                        value="{{ old('number') }}" min="1">
+                                        value="{{ old('number', $room->number) }}" min="1">
                                 </div>
                                 <div class="form-group">
                                     <label for="floor">Nomor Lantai</label>
                                     <input type="number" class="form-control" id="floor" name="floor" required
-                                        value="{{ old('floor') }}" min="1">
+                                        value="{{ old('floor', $room->floor) }}" min="1">
                                 </div>
                             </div>
                             <div class="card-footer">

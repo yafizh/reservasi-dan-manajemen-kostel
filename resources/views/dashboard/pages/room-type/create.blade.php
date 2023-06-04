@@ -36,13 +36,13 @@
                                 <div class="form-group">
                                     <label for="summernote">Fasilitas Kamar</label>
                                     <textarea id="summernote" name="facilities" required>
-                                        {{ old('facilites') }}
+                                        {!! old('facilites') !!}
                                     </textarea>
                                 </div>
                                 <div class="form-group">
                                     <label for="order">Urutan</label>
-                                    <input type="number" min="1" class="form-control" id="order" name="order" required
-                                        value="{{ old('order') }}">
+                                    <input type="number" min="1" class="form-control" id="order" name="order"
+                                        required value="{{ old('order') }}">
                                 </div>
                             </div>
                         </div>

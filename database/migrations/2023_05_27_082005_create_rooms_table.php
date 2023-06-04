@@ -12,7 +12,8 @@ return new class extends Migration
             $table->id();
             $table->foreignId('room_type_id');
             $table->unsignedSmallInteger('number');
-            $table->unsignedTinyInteger('status');
+            $table->unsignedTinyInteger('floor');
+            $table->unsignedTinyInteger('status')->default(1);
             $table->timestamps();
         });
     }

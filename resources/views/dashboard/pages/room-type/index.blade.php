@@ -28,6 +28,16 @@
                                         </tr>
                                     </thead>
                                     <tbody>
+                                        @foreach ($roomTypes as $roomType)
+                                            <tr>
+                                                <td class="text-center">{{ $loop->iteration }}</td>
+                                                <td class="text-center">{{ $roomType->name }}</td>
+                                                <td class="text-center">{{ $roomType->rooms->count() }}</td>
+                                                <td>
+                                                    <a href="/room-types/{{ $roomType->id }}/rooms" class="btn btn-info btn-sm">Lihat</a>
+                                                </td>
+                                            </tr>
+                                        @endforeach
                                     </tbody>
                                 </table>
                             </div>
