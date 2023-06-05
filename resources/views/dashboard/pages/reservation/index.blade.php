@@ -45,14 +45,8 @@
                                             <td class="text-center">{{ $reservation->phone_number }}</td>
                                             <td>
                                                 <div class="td-fit d-flex">
-                                                    <a href="/reservations/{{ $reservation->id }}/edit"
-                                                        class="btn btn-warning btn-sm mr-1">Ubah</a>
-                                                    <form action="/reservations/{{ $reservation->id }}" method="POST">
-                                                        @csrf
-                                                        @method('DELETE')
-                                                        <button type="submit"
-                                                            class="btn btn-danger btn-sm ml-1">Hapus</button>
-                                                    </form>
+                                                    <a href="/reservations/{{ $reservation->id }}"
+                                                        class="btn btn-info btn-sm mr-1">Lihat</a>
                                                 </div>
                                             </td>
                                         </tr>

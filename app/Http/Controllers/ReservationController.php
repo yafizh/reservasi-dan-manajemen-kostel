@@ -52,7 +52,11 @@ class ReservationController extends Controller
 
     public function show(Reservation $reservation)
     {
-        //
+        $reservationDate = Carbon::create($reservation->reservation_datetime)->locale('ID');
+        $checkInDate = Carbon::create($reservation->check_in_date)->locale('ID');
+        $reservation->reservation_date = "{$reservationDate->day} {$reservationDate->getTranslatedMonthName()} {$reservationDate->year}";
+        $reservation->check_in_date = "{$checkInDate->day} {$checkInDate->getTranslatedMonthName()} {$checkInDate->year}";
+        return view('dashboard.pages.reservation.show', compact('reservation'));
     }
 
     public function edit(Reservation $reservation)
@@ -79,12 +83,28 @@ class ReservationController extends Controller
 
     public function destroy(Reservation $reservation)
     {
-        CheckIn::destroy($reservation->checkIn->id);
-        ReservationCheckIn::where('reservation_id', $reservation->id)
-            ->where('check_in_id', $reservation->checkIn->id)
-            ->delete();
+        if ($reservation->checkIn) {
+            CheckIn::destroy($reservation->checkIn->id);
+            ReservationCheckIn::where('reservation_id', $reservation->id)
+                ->where('check_in_id', $reservation->checkIn->id)
+                ->delete();
+        }
         Reservation::destroy($reservation->id);
 
-        return redirect('/reservations')->with('success', 'Berhasil memperbaharui data pemesanan!');
+        return redirect('/reservations')->with('success', 'Berhasil menghapus data pemesanan!');
+    }
+    
+    public function cancelReservation(Reservation $reservation)
+    {
+        Reservation::where('id', $reservation->id)->update(['status' => 3]);
+        
+        return redirect('/reservations')->with('success', 'Berhasil memperbaharui status data pemesanan!');
+    }
+    
+    public function missingClient(Reservation $reservation)
+    {
+        Reservation::where('id', $reservation->id)->update(['status' => 4]);
+
+        return redirect('/reservations')->with('success', 'Berhasil memperbaharui status data pemesanan!');
     }
 }

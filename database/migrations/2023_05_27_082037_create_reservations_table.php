@@ -18,6 +18,7 @@ return new class extends Migration
             $table->unsignedBigInteger('down_payment');
             $table->timestamp('reservation_datetime');
             $table->date('check_in_date');
+            $table->unsignedTinyInteger('status')->default(1);
             $table->timestamps();
         });
     }

@@ -11,6 +11,11 @@ class Reservation extends Model
 
     protected $guarded = ['id'];
 
+    public function room()
+    {
+        return $this->belongsTo(Room::class);
+    }
+
     public function checkIn()
     {
         return $this->hasOneThrough(CheckIn::class, ReservationCheckIn::class, null, 'id', null, 'check_in_id');

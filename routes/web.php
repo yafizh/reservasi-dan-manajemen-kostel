@@ -19,11 +19,14 @@ Route::resource('/admin', AdminController::class);
 Route::resource('/employees', EmployeeController::class);
 Route::resource('/check-ins', CheckInController::class);
 Route::resource('/check-outs', CheckOutController::class)->except('create');
+
 Route::resource('/reservations', ReservationController::class);
+Route::patch('/reservations/cancel/{reservation}', [ReservationController::class, 'cancelReservation']);
+Route::patch('/reservations/missing-client/{reservation}', [ReservationController::class, 'missingClient']);
 
 Route::prefix('/room-types')->group(function () {
     Route::post('uploads/process', [UploadFileController::class, 'process']);
-    
+
     Route::get('/rooms', [RoomTypeController::class, 'index']);
     Route::resource('/{roomType}/rooms', RoomController::class);
 });
