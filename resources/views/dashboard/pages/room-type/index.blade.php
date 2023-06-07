@@ -63,10 +63,6 @@
                                         <tr>
                                             <th class="td-fit text-center">No</th>
                                             <th class="text-center">Tipe Kamar</th>
-                                            <th class="text-center">Harga Bulanan</th>
-                                            <th class="text-center">Harga Mingguan</th>
-                                            <th class="text-center">Harga Harian (Senin - Kamis)</th>
-                                            <th class="text-center">Harga Harian (Jum'at - Minggu)</th>
                                             <th class="td-fit text-center">Aksi</th>
                                         </tr>
                                     </thead>
@@ -75,10 +71,6 @@
                                             <tr>
                                                 <td class="text-center">{{ $loop->iteration }}</td>
                                                 <td class="text-center">{{ $roomType->name }}</td>
-                                                <td class="text-center">{{ $roomType->prices[0]->price }}</td>
-                                                <td class="text-center">{{ $roomType->prices[1]->price }}</td>
-                                                <td class="text-center">{{ $roomType->prices[2]->price }}</td>
-                                                <td class="text-center">{{ $roomType->prices[3]->price }}</td>
                                                 <td>
                                                     <div class="td-fit d-flex">
                                                         <a href="/room-types/{{ $roomType->id }}/edit"

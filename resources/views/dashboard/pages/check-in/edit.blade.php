@@ -5,7 +5,7 @@
         <div class="container-fluid">
             <div class="row mb-2 justify-content-center text-center">
                 <div class="col-sm-6">
-                    <h1 class="m-0">Check In</h1>
+                    <h1 class="m-0">Ubah Check In</h1>
                 </div>
             </div>
         </div>
@@ -13,8 +13,9 @@
 
     <section class="content">
         <div class="container-fluid">
-            <form action="/check-ins?reservation_id={{ request()->get('reservation_id') }}" method="POST">
+            <form action="/check-ins/{{ $checkIn->id }}" method="POST">
                 @csrf
+                @method('PUT')
                 <div class="row justify-content-center">
                     <div class="col-12">
                         @if ($errors->any())
@@ -31,19 +32,17 @@
                                 <div class="form-group">
                                     <label for="id_number">NIK</label>
                                     <input type="text" class="form-control" id="id_number" name="id_number" required
-                                        value="{{ old('id_number', $reservation->id_number ?? '') }}"
-                                        @disabled(!is_null($reservation)) />
+                                        value="{{ old('id_number', $checkIn->id_number) }}" />
                                 </div>
                                 <div class="form-group">
                                     <label for="name">Nama</label>
                                     <input type="text" class="form-control" id="name" name="name" required
-                                        value="{{ old('name', $reservation->name ?? '') }}" @disabled(!is_null($reservation))>
+                                        value="{{ old('name', $checkIn->name) }}">
                                 </div>
                                 <div class="form-group">
                                     <label for="phone_number">Nomor Telepon</label>
                                     <input type="text" class="form-control" id="phone_number" name="phone_number"
-                                        required value="{{ old('phone_number', $reservation->phone_number ?? '') }}"
-                                        @disabled(!is_null($reservation))>
+                                        required value="{{ old('phone_number', $checkIn->id_number) }}">
                                 </div>
                             </div>
 
@@ -58,14 +57,13 @@
                             <div class="card-body">
                                 <div class="form-group">
                                     <label for="room_id">Kamar</label>
-                                    <select class="form-control" name="room_id" id="room_id" required
-                                        @disabled(!is_null($reservation))>
+                                    <select class="form-control" name="room_id" id="room_id" required>
                                         <option value="" disabled selected>Pilih Kamar</option>
                                         @foreach ($roomTypes as $roomType)
                                             <optgroup label="{{ $roomType->name }}"
                                                 data-price_monthly="{{ $roomType->prices }}">
                                                 @foreach ($roomType->availableRooms as $room)
-                                                    <option value="{{ $room->id }}" @selected(old('room_id', $reservation->room->id ?? '') == $room->id)>
+                                                    <option value="{{ $room->id }}" @selected(old('room_id', $checkIn->room->id) == $room->id)>
                                                         {{ $roomType->name }} | Kamar Nomor {{ $room->number }} | Lantai
                                                         {{ $room->floor }}
                                                     </option>
@@ -76,10 +74,11 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="reservation_type_id">Jenis Penyewaan</label>
-                                    <select class="form-control" name="reservation_type_id" id="reservation_type_id" required>
+                                    <select class="form-control" name="reservation_type_id" id="reservation_type_id"
+                                        required>
                                         <option value="" disabled selected>Pilih Jenis Pembayaran</option>
                                         @foreach ($reservationTypes as $reservationType)
-                                            <option value="{{ $reservationType->id }}">
+                                            <option value="{{ $reservationType->id }}" @selected(old('reservation_type_id', $checkIn->reservationType->id) == $reservationType->id)>
                                                 @if ($reservationType->name == 1)
                                                     Bulanan
                                                 @elseif ($reservationType->name == 2)

@@ -10,7 +10,7 @@ class ReservationTypeSeeder extends Seeder
 {
     public function run(): void
     {
-        // 1 is Monly
+        // 1 is Monthly
         ReservationType::create([
             'name' => 1,
             'order' => 1
