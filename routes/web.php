@@ -18,7 +18,13 @@ Route::get('/', function () {
 Route::resource('/admin', AdminController::class);
 Route::resource('/employees', EmployeeController::class);
 Route::resource('/check-ins', CheckInController::class);
-Route::resource('/check-outs', CheckOutController::class)->except('create');
+
+Route::prefix('check-outs')->controller(CheckOutController::class)->group(function () {
+    Route::get('/', 'index');
+    Route::post('/{checkIn}', 'store');
+    Route::get('/{checkOut}', 'show');
+    Route::delete('/{checkOut}', 'destroy');
+});
 
 Route::resource('/reservations', ReservationController::class);
 Route::patch('/reservations/cancel/{reservation}', [ReservationController::class, 'cancelReservation']);

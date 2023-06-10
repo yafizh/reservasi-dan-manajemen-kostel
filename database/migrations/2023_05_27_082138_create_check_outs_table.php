@@ -10,7 +10,7 @@ return new class extends Migration
     {
         Schema::create('check_outs', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id');
+            $table->foreignId('user_id')->nullable();
             $table->foreignId('check_in_id');
             $table->timestamp('check_out_datetime');
             $table->timestamps();

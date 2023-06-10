@@ -20,4 +20,9 @@ class CheckIn extends Model
     {
         return $this->belongsTo(ReservationType::class);
     }
+
+    function price() {
+        return RoomTypePrice::where('room_type_id', $this->room->roomType->id)->where('reservation_type_id', $this->reservationType->id)->first()->price;
+    }
+
 }
