@@ -4,6 +4,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\CheckInController;
 use App\Http\Controllers\CheckOutController;
 use App\Http\Controllers\EmployeeController;
+use App\Http\Controllers\PrintController;
 use App\Http\Controllers\ReportController;
 use App\Http\Controllers\ReservationController;
 use App\Http\Controllers\RoomController;
@@ -40,9 +41,24 @@ Route::resource('/room-types', RoomTypeController::class);
 
 Route::prefix('/report')->controller(ReportController::class)->group(function () {
     Route::get('/reservations', 'reservation');
+    Route::post('/reservations', 'reservation');
+    
+    Route::get('/check-ins', 'checkIn');
+    Route::post('/check-ins', 'checkIn');
+
+    Route::get('/check-outs', 'checkOut');
+    Route::post('/check-outs', 'checkOut');
+
+    Route::get('/available-rooms', 'availableRoom');
+    Route::post('/available-rooms', 'availableRoom');
+
+    Route::get('/reservation-chart', 'reservationChart');
+    Route::get('/check-in-chart', 'checkInChart');
+});
+
+Route::prefix('/print')->controller(PrintController::class)->group(function () {
+    Route::get('/reservations', 'reservation');
     Route::get('/check-ins', 'checkIn');
     Route::get('/check-outs', 'checkOut');
     Route::get('/available-rooms', 'availableRoom');
-    Route::get('/reservation-chart', 'reservationChart');
-    Route::get('/check-in-chart', 'checkInChart');
 });

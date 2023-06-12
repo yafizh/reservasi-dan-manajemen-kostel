@@ -1,17 +1,13 @@
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <div class="sidebar">
         <div class="user-panel mt-3 pb-3 mb-3 d-flex">
-            <div class="image">
-                <img src="/dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
-            </div>
             <div class="info">
-                <a href="#" class="d-block">Alexander Pierce</a>
+                <a href="#" class="d-block">ADMIN</a>
             </div>
         </div>
 
         <nav class="mt-2">
-            <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu"
-                data-accordion="false">
+            <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
                 <li class="nav-header">MENU USER</li>
                 <li class="nav-item">
                     <a href="/admin" @class(['nav-link', 'active' => request()->segment(1) == 'admin'])>
@@ -48,7 +44,11 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="/room-types/rooms" @class(['nav-link', 'active' => request()->segment(2) == 'rooms' || request()->segment(3) == 'rooms'])>
+                    <a href="/room-types/rooms" @class([
+                        'nav-link',
+                        'active' =>
+                            request()->segment(2) == 'rooms' || request()->segment(3) == 'rooms',
+                    ])>
                         <i class="nav-icon fas fa-warehouse"></i>
                         <p>
                             Kamar
@@ -100,6 +100,15 @@
                     </a>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
+                            <a href="/report/employees" @class([
+                                'nav-link',
+                                'active' => request()->segment(2) == 'employees',
+                            ])>
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Pegawai</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
                             <a href="/report/reservations" @class([
                                 'nav-link',
                                 'active' => request()->segment(2) == 'reservations',
@@ -130,6 +139,15 @@
                             ])>
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Ketersediaan Kamar</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="/report/count-rooms" @class([
+                                'nav-link',
+                                'active' => request()->segment(2) == 'count-rooms',
+                            ])>
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Jumlah Kamar</p>
                             </a>
                         </li>
                         <li class="nav-item">

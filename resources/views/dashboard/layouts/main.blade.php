@@ -109,7 +109,7 @@
     <script>
         $(function() {
             $('#example1').DataTable({
-                "paging": false,
+                "paging": true,
                 "lengthChange": false,
                 "searching": false,
                 "ordering": false,
