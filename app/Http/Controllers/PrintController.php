@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Charts\BarChart;
 use App\Models\CheckIn;
 use App\Models\CheckOut;
 use App\Models\Employee;
@@ -78,7 +79,8 @@ class PrintController extends Controller
         return view('dashboard.pages.print.check-out', compact('checkOuts', 'filters'));
     }
 
-    public function availableRoom(Request $request) {
+    public function availableRoom(Request $request)
+    {
         $filters = [];
         $query = Room::orderBy('number');
 
@@ -112,5 +114,66 @@ class PrintController extends Controller
 
         $rooms = $query->get();
         return view('dashboard.pages.print.available-room', compact('rooms', 'filters'));
+    }
+
+    public function checkInChart()
+    {
+        $filters = [
+            "year"      => request()->get('year'),
+            "quarter"   => ""
+        ];
+        $chart = new BarChart;
+        $query = CheckIn::whereYear('check_in_datetime', request()->get('year'))->orderBy('check_in_datetime');
+
+        if (request()->get('quarter') == 1) {
+            $query->where(function ($q) {
+                $q->whereMonth('check_in_datetime', '>=', 1)->whereMonth('check_in_datetime', '<=', 3);
+            });
+            $chart->labels(['Januari', 'Februari', 'Maret']);
+            $filters['quarter'] = "Kuarter 1 (Januari - Maret)";
+        }
+
+        if (request()->get('quarter') == 2) {
+            $query->where(function ($q) {
+                $q->whereMonth('check_in_datetime', '>=', 4)->whereMonth('check_in_datetime', '<=', 6);
+            });
+            $chart->labels(['April', 'Mei', 'Juni']);
+            $filters['quarter'] = "Kuarter 2 (April - Juni)";
+        }
+
+        if (request()->get('quarter') == 3) {
+            $query->where(function ($q) {
+                $q->whereMonth('check_in_datetime', '>=', 7)->whereMonth('check_in_datetime', '<=', 9);
+            });
+            $chart->labels(['Juli', 'Agustus', 'September']);
+            $filters['quarter'] = "Kuarter 3 (Juli - September)";
+        }
+
+        if (request()->get('quarter') == 4) {
+            $query->where(function ($q) {
+                $q->whereMonth('check_in_datetime', '>=', 10)->whereMonth('check_in_datetime', '<=', 12);
+            });
+            $chart->labels(['Oktober', 'November', 'Desember']);
+            $filters['quarter'] = "Kuarter 4 (Oktober - Desember)";
+        }
+
+        $dataset = [0, 0, 0];
+        foreach ($query->get() as $value) {
+            if (in_array(explode('-', $value['tanggal'])[1], [1, 4, 7, 10]))
+                $dataset[0]++;
+
+            if (in_array(explode('-', $value['tanggal'])[1], [2, 5, 8, 11]))
+                $dataset[1]++;
+
+            if (in_array(explode('-', $value['tanggal'])[1], [3, 6, 9, 12]))
+                $dataset[2]++;
+        }
+
+        $chart->dataset('Check In', 'bar', $dataset)->options([
+            'backgroundColor' => '#204A40',
+        ]);
+        $chart->setStepSize(max($dataset), 8);
+
+        return view('dashboard.pages.print.check-in-chart', compact('chart', 'filters'));
     }
 }
