@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\CheckIn;
 use App\Models\CheckOut;
+use App\Models\Employee;
 use App\Models\Reservation;
 use App\Models\Room;
 use Carbon\Carbon;
@@ -11,6 +12,12 @@ use Illuminate\Http\Request;
 
 class PrintController extends Controller
 {
+    public function employee(Request $request)
+    {
+        $employees = Employee::orderBy('name')->get();
+        return view('dashboard.pages.print.employee', compact('employees'));
+    }
+
     public function reservation(Request $request)
     {
         $filters = [];

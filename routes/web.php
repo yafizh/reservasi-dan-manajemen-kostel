@@ -40,6 +40,8 @@ Route::prefix('/room-types')->group(function () {
 Route::resource('/room-types', RoomTypeController::class);
 
 Route::prefix('/report')->controller(ReportController::class)->group(function () {
+    Route::get('/employees', 'employee');
+
     Route::get('/reservations', 'reservation');
     Route::post('/reservations', 'reservation');
     
@@ -57,6 +59,7 @@ Route::prefix('/report')->controller(ReportController::class)->group(function ()
 });
 
 Route::prefix('/print')->controller(PrintController::class)->group(function () {
+    Route::get('/employees', 'employee');
     Route::get('/reservations', 'reservation');
     Route::get('/check-ins', 'checkIn');
     Route::get('/check-outs', 'checkOut');

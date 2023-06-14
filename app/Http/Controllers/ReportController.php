@@ -4,12 +4,19 @@ namespace App\Http\Controllers;
 
 use App\Models\CheckIn;
 use App\Models\CheckOut;
+use App\Models\Employee;
 use App\Models\Reservation;
 use App\Models\Room;
 use Illuminate\Http\Request;
 
 class ReportController extends Controller
 {
+    public function employee(Request $request)
+    {
+        $employees = Employee::orderBy('name')->get();
+        return view('dashboard.pages.report.employee', compact('employees'));
+    }
+
     public function reservation(Request $request)
     {
         $query = Reservation::orderBy('created_at', 'DESC');
