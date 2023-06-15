@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Validation\ValidationException;
 
 class LoginController extends Controller
 {
@@ -36,5 +39,41 @@ class LoginController extends Controller
     {
         Auth::logout();
         return redirect('/');
+    }
+
+    public function changePassword() {
+        return view('dashboard.pages.change-password.index');
+    }
+
+    public function updatePassword(Request $request) {
+        $validatedData = $request->validate([
+            'old_password' => 'required',
+            'new_password' => 'required',
+            'confirm_new_password' => 'required',
+        ]);
+
+        if (!$this->cekPasswordLama($validatedData['old_password'])) {
+            throw ValidationException::withMessages(['old_password' => 'Password Lama Salah']);
+        }
+
+        if (!$this->cekPasswordBaru($validatedData['new_password'], $validatedData['confirm_new_password'])) {
+            throw ValidationException::withMessages(['new_password' => 'Password Baru Tidak Sama']);
+        }
+
+        User::where('id', Auth::user()->id)->update([
+            'password' => bcrypt($validatedData['new_password']),
+        ]);
+
+        return back()->with('success', 'Berhasil Ganti Password!');
+    }
+
+    public function cekPasswordLama($password_lama)
+    {
+        return Hash::check($password_lama, auth()->user()->password);
+    }
+
+    public function cekPasswordBaru($password1, $password2)
+    {
+        return $password1 === $password2;
     }
 }

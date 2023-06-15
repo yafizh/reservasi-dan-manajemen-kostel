@@ -21,6 +21,9 @@ Route::controller(LoginController::class)->group(function () {
     Route::get('/login', 'index')->name('login');
     Route::post('/login', 'login');
     Route::get('/logout', 'logout');
+
+    Route::get('/change-password', 'changePassword');
+    Route::post('/change-password', 'updatePassword');
 });
 
 Route::middleware('auth')->group(function () {
