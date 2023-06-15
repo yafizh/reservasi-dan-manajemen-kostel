@@ -58,6 +58,7 @@ Route::prefix('/report')->controller(ReportController::class)->group(function ()
     Route::post('/check-in-chart', 'checkInChart');
     
     Route::get('/reservation-chart', 'reservationChart');
+    Route::post('/reservation-chart', 'reservationChart');
 });
 
 Route::prefix('/print')->controller(PrintController::class)->group(function () {
@@ -67,4 +68,5 @@ Route::prefix('/print')->controller(PrintController::class)->group(function () {
     Route::get('/check-outs', 'checkOut');
     Route::get('/available-rooms', 'availableRoom');
     Route::get('/check-ins-chart', 'checkInChart');
+    Route::get('/reservations-chart', 'reservationChart');
 });

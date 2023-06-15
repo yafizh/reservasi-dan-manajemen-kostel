@@ -176,4 +176,65 @@ class PrintController extends Controller
 
         return view('dashboard.pages.print.check-in-chart', compact('chart', 'filters'));
     }
+
+    public function reservationChart()
+    {
+        $filters = [
+            "year"      => request()->get('year'),
+            "quarter"   => ""
+        ];
+        $chart = new BarChart;
+        $query = Reservation::whereYear('reservation_datetime', request()->get('year'))->orderBy('reservation_datetime');
+
+        if (request()->get('quarter') == 1) {
+            $query->where(function ($q) {
+                $q->whereMonth('reservation_datetime', '>=', 1)->whereMonth('reservation_datetime', '<=', 3);
+            });
+            $chart->labels(['Januari', 'Februari', 'Maret']);
+            $filters['quarter'] = "Kuarter 1 (Januari - Maret)";
+        }
+
+        if (request()->get('quarter') == 2) {
+            $query->where(function ($q) {
+                $q->whereMonth('reservation_datetime', '>=', 4)->whereMonth('reservation_datetime', '<=', 6);
+            });
+            $chart->labels(['April', 'Mei', 'Juni']);
+            $filters['quarter'] = "Kuarter 2 (April - Juni)";
+        }
+
+        if (request()->get('quarter') == 3) {
+            $query->where(function ($q) {
+                $q->whereMonth('reservation_datetime', '>=', 7)->whereMonth('reservation_datetime', '<=', 9);
+            });
+            $chart->labels(['Juli', 'Agustus', 'September']);
+            $filters['quarter'] = "Kuarter 3 (Juli - September)";
+        }
+
+        if (request()->get('quarter') == 4) {
+            $query->where(function ($q) {
+                $q->whereMonth('reservation_datetime', '>=', 10)->whereMonth('reservation_datetime', '<=', 12);
+            });
+            $chart->labels(['Oktober', 'November', 'Desember']);
+            $filters['quarter'] = "Kuarter 4 (Oktober - Desember)";
+        }
+
+        $dataset = [0, 0, 0];
+        foreach ($query->get() as $value) {
+            if (in_array(explode('-', $value['tanggal'])[1], [1, 4, 7, 10]))
+                $dataset[0]++;
+
+            if (in_array(explode('-', $value['tanggal'])[1], [2, 5, 8, 11]))
+                $dataset[1]++;
+
+            if (in_array(explode('-', $value['tanggal'])[1], [3, 6, 9, 12]))
+                $dataset[2]++;
+        }
+
+        $chart->dataset('Pemesanan', 'bar', $dataset)->options([
+            'backgroundColor' => '#204A40',
+        ]);
+        $chart->setStepSize(max($dataset), 8);
+
+        return view('dashboard.pages.print.reservation-chart', compact('chart', 'filters'));
+    }
 }
