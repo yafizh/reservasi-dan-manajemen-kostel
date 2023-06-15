@@ -142,12 +142,12 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="/report/count-rooms" @class([
+                            <a href="/report/employee-services" @class([
                                 'nav-link',
-                                'active' => request()->segment(2) == 'count-rooms',
+                                'active' => request()->segment(2) == 'employee-services',
                             ])>
                                 <i class="far fa-circle nav-icon"></i>
-                                <p>Jumlah Kamar</p>
+                                <p>Pelayanan Pegawai</p>
                             </a>
                         </li>
                         <li class="nav-item">

@@ -59,10 +59,14 @@ Route::prefix('/report')->controller(ReportController::class)->group(function ()
     
     Route::get('/reservation-chart', 'reservationChart');
     Route::post('/reservation-chart', 'reservationChart');
+
+    Route::get('/employee-services', 'employeeService');
+    Route::post('/employee-services', 'employeeService');
 });
 
 Route::prefix('/print')->controller(PrintController::class)->group(function () {
     Route::get('/employees', 'employee');
+    Route::get('/employee-services', 'employeeService');
     Route::get('/reservations', 'reservation');
     Route::get('/check-ins', 'checkIn');
     Route::get('/check-outs', 'checkOut');

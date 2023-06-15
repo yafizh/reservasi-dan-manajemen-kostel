@@ -18,6 +18,23 @@ class ReportController extends Controller
         return view('dashboard.pages.report.employee', compact('employees'));
     }
 
+    public function employeeService(Request $request)
+    {
+        $employees = Employee::orderBy('name', 'DESC')->get()->map(function ($employee) use ($request) {
+            $employeeServices = $employee->employeeServices();
+
+            if ($request->get('from') && $request->get('to'))
+                $employeeServices = $employee->employeeServices($request->get('from'), $request->get('to'));
+
+            $employee->serviceCheckIn = $employeeServices['check_ins'];
+            $employee->serviceCheckOut = $employeeServices['check_outs'];
+            $employee->serviceReservation = $employeeServices['reservations'];
+            return $employee;
+        });
+
+        return view('dashboard.pages.report.employee-service', compact('employees'));
+    }
+
     public function reservation(Request $request)
     {
         $query = Reservation::orderBy('created_at', 'DESC');
@@ -139,7 +156,7 @@ class ReportController extends Controller
             ]);
             $chart->setStepSize(max($dataset), 8);
         }
-        
+
         return view('dashboard.pages.report.reservation-chart', compact('chart'));
     }
 
@@ -195,7 +212,7 @@ class ReportController extends Controller
             ]);
             $chart->setStepSize(max($dataset), 8);
         }
-        
+
         return view('dashboard.pages.report.check-in-chart', compact('chart'));
     }
 }

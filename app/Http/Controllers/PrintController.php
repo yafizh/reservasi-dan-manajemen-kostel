@@ -19,6 +19,30 @@ class PrintController extends Controller
         return view('dashboard.pages.print.employee', compact('employees'));
     }
 
+    public function employeeService(Request $request)
+    {
+        $filters = [];
+        $employees = Employee::orderBy('name', 'DESC')->get()->map(function ($employee) use ($request, &$filters) {
+            $employeeServices = $employee->employeeServices();
+
+            if ($request->get('from') && $request->get('to')){
+                $employeeServices = $employee->employeeServices($request->get('from'), $request->get('to'));
+                $from = Carbon::create($request->get('from'))->locale('ID');
+                $to = Carbon::create($request->get('to'))->locale('ID');
+    
+                $filters['from'] = "{$from->day} {$from->getTranslatedMonthName()} {$from->year}";
+                $filters['to'] = "{$to->day} {$to->getTranslatedMonthName()} {$to->year}";
+            }
+
+            $employee->serviceCheckIn = $employeeServices['check_ins'];
+            $employee->serviceCheckOut = $employeeServices['check_outs'];
+            $employee->serviceReservation = $employeeServices['reservations'];
+            return $employee;
+        });
+
+        return view('dashboard.pages.print.employee-service', compact('employees', 'filters'));
+    }
+
     public function reservation(Request $request)
     {
         $filters = [];
@@ -116,16 +140,16 @@ class PrintController extends Controller
         return view('dashboard.pages.print.available-room', compact('rooms', 'filters'));
     }
 
-    public function checkInChart()
+    public function checkInChart(Request $request)
     {
         $filters = [
-            "year"      => request()->get('year'),
+            "year"      => $request->get('year'),
             "quarter"   => ""
         ];
         $chart = new BarChart;
-        $query = CheckIn::whereYear('check_in_datetime', request()->get('year'))->orderBy('check_in_datetime');
+        $query = CheckIn::whereYear('check_in_datetime', $request->get('year'))->orderBy('check_in_datetime');
 
-        if (request()->get('quarter') == 1) {
+        if ($request->get('quarter') == 1) {
             $query->where(function ($q) {
                 $q->whereMonth('check_in_datetime', '>=', 1)->whereMonth('check_in_datetime', '<=', 3);
             });
@@ -133,7 +157,7 @@ class PrintController extends Controller
             $filters['quarter'] = "Kuarter 1 (Januari - Maret)";
         }
 
-        if (request()->get('quarter') == 2) {
+        if ($request->get('quarter') == 2) {
             $query->where(function ($q) {
                 $q->whereMonth('check_in_datetime', '>=', 4)->whereMonth('check_in_datetime', '<=', 6);
             });
@@ -141,7 +165,7 @@ class PrintController extends Controller
             $filters['quarter'] = "Kuarter 2 (April - Juni)";
         }
 
-        if (request()->get('quarter') == 3) {
+        if ($request->get('quarter') == 3) {
             $query->where(function ($q) {
                 $q->whereMonth('check_in_datetime', '>=', 7)->whereMonth('check_in_datetime', '<=', 9);
             });
@@ -149,7 +173,7 @@ class PrintController extends Controller
             $filters['quarter'] = "Kuarter 3 (Juli - September)";
         }
 
-        if (request()->get('quarter') == 4) {
+        if ($request->get('quarter') == 4) {
             $query->where(function ($q) {
                 $q->whereMonth('check_in_datetime', '>=', 10)->whereMonth('check_in_datetime', '<=', 12);
             });
@@ -177,16 +201,16 @@ class PrintController extends Controller
         return view('dashboard.pages.print.check-in-chart', compact('chart', 'filters'));
     }
 
-    public function reservationChart()
+    public function reservationChart(Request $request)
     {
         $filters = [
-            "year"      => request()->get('year'),
+            "year"      => $request->get('year'),
             "quarter"   => ""
         ];
         $chart = new BarChart;
-        $query = Reservation::whereYear('reservation_datetime', request()->get('year'))->orderBy('reservation_datetime');
+        $query = Reservation::whereYear('reservation_datetime', $request->get('year'))->orderBy('reservation_datetime');
 
-        if (request()->get('quarter') == 1) {
+        if ($request->get('quarter') == 1) {
             $query->where(function ($q) {
                 $q->whereMonth('reservation_datetime', '>=', 1)->whereMonth('reservation_datetime', '<=', 3);
             });
@@ -194,7 +218,7 @@ class PrintController extends Controller
             $filters['quarter'] = "Kuarter 1 (Januari - Maret)";
         }
 
-        if (request()->get('quarter') == 2) {
+        if ($request->get('quarter') == 2) {
             $query->where(function ($q) {
                 $q->whereMonth('reservation_datetime', '>=', 4)->whereMonth('reservation_datetime', '<=', 6);
             });
@@ -202,7 +226,7 @@ class PrintController extends Controller
             $filters['quarter'] = "Kuarter 2 (April - Juni)";
         }
 
-        if (request()->get('quarter') == 3) {
+        if ($request->get('quarter') == 3) {
             $query->where(function ($q) {
                 $q->whereMonth('reservation_datetime', '>=', 7)->whereMonth('reservation_datetime', '<=', 9);
             });
@@ -210,7 +234,7 @@ class PrintController extends Controller
             $filters['quarter'] = "Kuarter 3 (Juli - September)";
         }
 
-        if (request()->get('quarter') == 4) {
+        if ($request->get('quarter') == 4) {
             $query->where(function ($q) {
                 $q->whereMonth('reservation_datetime', '>=', 10)->whereMonth('reservation_datetime', '<=', 12);
             });
