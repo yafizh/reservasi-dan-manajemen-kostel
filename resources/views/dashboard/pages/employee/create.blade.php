@@ -78,4 +78,9 @@
             </form>
         </div>
     </section>
+    <script>
+        document.querySelector('input[name=id_number]').addEventListener('input', function(){
+            document.querySelector('input[name=username]').value = this.value;
+        });
+    </script>
 @endsection

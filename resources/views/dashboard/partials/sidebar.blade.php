@@ -100,15 +100,6 @@
                     </a>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            <a href="/report/employees" @class([
-                                'nav-link',
-                                'active' => request()->segment(2) == 'employees',
-                            ])>
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Pegawai</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
                             <a href="/report/reservations" @class([
                                 'nav-link',
                                 'active' => request()->segment(2) == 'reservations',
@@ -142,6 +133,12 @@
                             </a>
                         </li>
                         <li class="nav-item">
+                            <a href="/report/employees" @class(['nav-link', 'active' => request()->segment(2) == 'employees'])>
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Pegawai</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
                             <a href="/report/employee-services" @class([
                                 'nav-link',
                                 'active' => request()->segment(2) == 'employee-services',
@@ -169,6 +166,26 @@
                             </a>
                         </li>
                     </ul>
+                </li>
+                <li class="nav-header">PENGATURAN</li>
+                <li class="nav-item">
+                    <a href="/change-password" @class([
+                        'nav-link',
+                        'active' => request()->segment(1) == 'change-password',
+                    ])>
+                        <i class="nav-icon fas fa-lock"></i>
+                        <p>
+                            Ganti Password
+                        </p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="/logout" class="nav-link">
+                        <i class="nav-icon fas fa-sign-out-alt"></i>
+                        <p>
+                            Log Out
+                        </p>
+                    </a>
                 </li>
             </ul>
         </nav>
