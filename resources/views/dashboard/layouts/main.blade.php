@@ -41,6 +41,47 @@
             width: 1%;
             white-space: nowrap;
         }
+
+        .btn-primary {
+            background-color: #1d1d1d !important;
+            border: #1d1d1d 1px solid;
+        }
+
+        .btn-primary:hover {
+            background-color: #4a4a4a !important;
+            border: #4a4a4a 1px solid;
+        }
+
+        .main-sidebar {
+            background-color: #fff !important;
+            color: #1d1d1d !important;
+        }
+
+        .main-sidebar .nav-sidebar .active {
+            background-color: #1d1d1d !important;
+            color: #fff !important;
+        }
+
+        .page-item.active .page-link {
+            color: #fff !important;
+            background-color: #1d1d1d !important;
+            border-color: #1d1d1d !important;
+        }
+
+        .page-link {
+            color: #1d1d1d !important;
+            background-color: #fff !important;
+            border: 1px solid #dee2e6 !important;
+        }
+
+        .page-link:hover {
+            color: #fff !important;
+            background-color: #1d1d1d !important;
+            border-color: #1d1d1d !important;
+        }
+        .nav-link:hover{
+            color: #1d1d1d!important;
+        }
     </style>
 </head>
 

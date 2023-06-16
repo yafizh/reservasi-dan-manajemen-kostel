@@ -53,7 +53,7 @@
                                                     $get .= 'status=' . request()->get('status') . '&date=' . request()->get('date');
                                                 }
                                             @endphp
-                                            <a href="/print/available-rooms{{ $get }}" target="_blank" class="btn btn-success">
+                                            <a href="/print/available-rooms{{ $get }}" target="_blank" class="btn btn-primary">
                                                 Cetak
                                             </a>
                                         </div>

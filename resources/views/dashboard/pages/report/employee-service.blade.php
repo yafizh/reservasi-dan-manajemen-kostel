@@ -46,7 +46,7 @@
                                                 }
                                             @endphp
                                             <a href="/print/employee-services{{ $get }}" target="_blank"
-                                                class="btn btn-success">
+                                                class="btn btn-primary">
                                                 Cetak
                                             </a>
                                         </div>

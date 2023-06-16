@@ -63,7 +63,7 @@
                                                 }
                                             @endphp
                                             <a href="/print/reservations-chart{{ $get }}" target="_blank"
-                                                class="btn btn-success">
+                                                class="btn btn-primary">
                                                 Cetak
                                             </a>
                                         </div>

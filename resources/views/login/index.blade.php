@@ -15,6 +15,27 @@
     <link rel="stylesheet" href="/plugins/icheck-bootstrap/icheck-bootstrap.min.css">
     <!-- Theme style -->
     <link rel="stylesheet" href="/dist/css/adminlte.min.css">
+    <style>
+        .card-primary {
+            border-color: #1d1d1d !important;
+            /* background-color: red!important; */
+        }
+
+
+        .btn-primary {
+            background-color: #1d1d1d !important;
+            border: #1d1d1d 1px solid;
+        }
+
+        .btn-primary:hover {
+            background-color: #4a4a4a !important;
+            border: #4a4a4a 1px solid;
+        }
+
+        input:focus {
+            border-color: #1d1d1d !important;
+        }
+    </style>
 </head>
 
 <body class="hold-transition login-page">
@@ -22,7 +43,7 @@
         <!-- /.login-logo -->
         <div class="card card-outline card-primary">
             <div class="card-header text-center">
-                <div class="h1"><b>Admin</b>LTE</div>
+                <img src="/logo.png" style="width: 10rem;">
             </div>
             <div class="card-body">
                 @if (session('failed'))

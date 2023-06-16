@@ -1,8 +1,10 @@
-<aside class="main-sidebar sidebar-dark-primary elevation-4">
+<aside class="main-sidebar elevation-4">
     <div class="sidebar">
         <div class="user-panel mt-3 pb-3 mb-3 d-flex justify-content-center text-white">
             <div class="info">
-                <h4>GRAHA PUTIH</h4>
+                <div class="px-5">
+                    <img src="/logo.png" style="width: 100%;">
+                </div>
             </div>
         </div>
 

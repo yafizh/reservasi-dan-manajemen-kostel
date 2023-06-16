@@ -45,7 +45,7 @@
                                                     $get .= 'from=' . request()->get('from') . '&to=' . request()->get('to');
                                                 }
                                             @endphp
-                                            <a href="/print/check-outs{{ $get }}" target="_blank" class="btn btn-success">
+                                            <a href="/print/check-outs{{ $get }}" target="_blank" class="btn btn-primary">
                                                 Cetak
                                             </a>
                                         </div>

@@ -17,7 +17,7 @@
                 <div class="col-12">
                     <div class="card">
                         <div class="card-header">
-                            <a href="/print/employees" target="_blank" class="btn btn-success float-right">Cetak</a>
+                            <a href="/print/employees" target="_blank" class="btn btn-primary float-right">Cetak</a>
                         </div>
                         <div class="card-body">
                             <table id="example1" class="table table-bordered table-hover">
