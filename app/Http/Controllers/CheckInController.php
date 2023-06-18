@@ -62,11 +62,12 @@ class CheckInController extends Controller
             $validatedData['room_id']       = $reservation->room_id;
         }
 
-        $validatedData['user_id'] = Auth::user()->id ?? null;
+        $validatedData['user_id']           = Auth::user()->id ?? null;
         $validatedData['check_in_datetime'] = Carbon::now()->setTimezone('Asia/Kuala_Lumpur')->toDateTimeLocalString();
         $checkInId = CheckIn::create($validatedData)->id;
 
         if (!is_null($request->get('reservation_id'))) {
+            Reservation::find($request->get('reservation_id'))->update(['status' => 2]);
             ReservationCheckIn::create([
                 'reservation_id' => $request->get('reservation_id'),
                 'check_in_id'   => $checkInId

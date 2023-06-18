@@ -8,6 +8,7 @@ use App\Models\CheckOut;
 use App\Models\Employee;
 use App\Models\Reservation;
 use App\Models\Room;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class ReportController extends Controller
@@ -44,7 +45,16 @@ class ReportController extends Controller
                 ->whereRaw('DATE(reservation_datetime) = ' . $request->get('to'));
         }
 
-        $reservations = $query->get();
+
+        $reservations = $query->get()
+            ->map(function ($reservation) {
+                $reservationDate = Carbon::create($reservation->reservation_datetime)->locale('ID');
+                $checkInDate = Carbon::create($reservation->check_in_date)->locale('ID');
+                $reservation->reservation_date = "{$reservationDate->day} {$reservationDate->getTranslatedMonthName()} {$reservationDate->year}";
+                $reservation->check_in_date = "{$checkInDate->day} {$checkInDate->getTranslatedMonthName()} {$checkInDate->year}";
+                return $reservation;
+            });
+
         return view('dashboard.pages.report.reservation', compact('reservations'));
     }
 
@@ -57,7 +67,13 @@ class ReportController extends Controller
                 ->whereRaw('DATE(check_in_datetime) = ' . $request->get('to'));
         }
 
-        $checkIns = $query->get();
+        $checkIns = $query
+            ->get()
+            ->map(function ($checkIn) {
+                $checkInDate = Carbon::create($checkIn->check_in_datetime)->locale('ID');
+                $checkIn->check_in_date = "{$checkInDate->day} {$checkInDate->getTranslatedMonthName()} {$checkInDate->year}";
+                return $checkIn;
+            });
         return view('dashboard.pages.report.check-in', compact('checkIns'));
     }
 

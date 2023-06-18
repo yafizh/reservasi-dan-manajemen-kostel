@@ -15,6 +15,7 @@ class ReservationController extends Controller
     public function index()
     {
         $reservations = Reservation::orderBy('reservation_datetime', 'DESC')
+            ->where('status', 1)
             ->get()
             ->map(function ($reservation) {
                 $reservationDate = Carbon::create($reservation->reservation_datetime)->locale('ID');
@@ -93,14 +94,14 @@ class ReservationController extends Controller
 
         return redirect('/reservations')->with('success', 'Berhasil menghapus data pemesanan!');
     }
-    
+
     public function cancelReservation(Reservation $reservation)
     {
         Reservation::where('id', $reservation->id)->update(['status' => 3]);
-        
+
         return redirect('/reservations')->with('success', 'Berhasil memperbaharui status data pemesanan!');
     }
-    
+
     public function missingClient(Reservation $reservation)
     {
         Reservation::where('id', $reservation->id)->update(['status' => 4]);

@@ -27,4 +27,17 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+    public function checkIns()
+    {
+        return $this->hasMany(CheckIn::class);
+    }
+    public function checkOuts()
+    {
+        return $this->hasMany(CheckOut::class);
+    }
+    public function reservations()
+    {
+        return $this->hasMany(Reservation::class);
+    }
 }
