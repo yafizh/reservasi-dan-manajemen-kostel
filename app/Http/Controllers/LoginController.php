@@ -32,7 +32,7 @@ class LoginController extends Controller
                 return redirect()->intended('/reservations');
         }
 
-        return back()->with('failed', 'Username atau Password salah!');
+        return redirect('/login')->with('failed', 'Username atau Password salah!');
     }
 
     public function logout()

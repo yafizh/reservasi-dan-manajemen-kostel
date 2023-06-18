@@ -79,10 +79,17 @@
             background-color: #1d1d1d !important;
             border-color: #1d1d1d !important;
         }
-        .nav-link:hover{
-            color: #1d1d1d!important;
+
+        .nav-link:hover {
+            color: #1d1d1d !important;
         }
     </style>
+    <script>
+        const formatNumberWithDot = new Intl.NumberFormat('id-ID', {
+            currency: 'IDR',
+            maximumFractionDigits: 0,
+        });
+    </script>
 </head>
 
 <body class="hold-transition sidebar-mini layout-fixed">

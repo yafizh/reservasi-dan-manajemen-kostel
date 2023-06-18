@@ -11,6 +11,7 @@ use App\Http\Controllers\ReservationController;
 use App\Http\Controllers\RoomController;
 use App\Http\Controllers\RoomTypeController;
 use App\Http\Controllers\UploadFileController;
+use App\Http\Middleware\IsLogin;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -26,7 +27,7 @@ Route::controller(LoginController::class)->group(function () {
     Route::post('/change-password', 'updatePassword');
 });
 
-Route::middleware('auth')->group(function () {
+Route::middleware(IsLogin::class)->group(function () {
     Route::resource('/admin', AdminController::class);
     Route::resource('/employees', EmployeeController::class);
     Route::resource('/check-ins', CheckInController::class);
