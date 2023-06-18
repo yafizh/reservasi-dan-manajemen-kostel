@@ -35,10 +35,10 @@
                     @foreach ($checkOuts as $checkOut)
                         <tr>
                             <td class="text-center align-middle">{{ $loop->iteration }}</td>
-                            <td class="text-center align-middle">{{ $checkOut->check_in_date }}</td>
-                            <td class="text-center align-middle">Kamar Nomor {{ $checkOut->room->number }}</td>
-                            <td class="text-center align-middle">{{ $checkOut->id_number }}</td>
-                            <td class="text-center align-middle">{{ $checkOut->name }}</td>
+                            <td class="text-center align-middle">{{ $checkOut->check_out_date }}</td>
+                            <td class="text-center align-middle">Kamar Nomor {{ $checkOut->checkIn->room->number }}</td>
+                            <td class="text-center align-middle">{{ $checkOut->checkIn->id_number }}</td>
+                            <td class="text-center align-middle">{{ $checkOut->checkIn->name }}</td>
                         </tr>
                     @endforeach
                 @else

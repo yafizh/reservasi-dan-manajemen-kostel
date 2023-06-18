@@ -46,7 +46,8 @@ class ReportController extends Controller
         }
 
 
-        $reservations = $query->get()
+        $reservations = $query
+            ->get()
             ->map(function ($reservation) {
                 $reservationDate = Carbon::create($reservation->reservation_datetime)->locale('ID');
                 $checkInDate = Carbon::create($reservation->check_in_date)->locale('ID');
@@ -86,7 +87,13 @@ class ReportController extends Controller
                 ->whereRaw('DATE(check_out_datetime) = ' . $request->get('to'));
         }
 
-        $checkOuts = $query->get();
+        $checkOuts = $query
+            ->get()
+            ->map(function ($checkOut) {
+                $checkOutDate = Carbon::create($checkOut->check_out_datetime)->locale('ID');
+                $checkOut->check_out_date = "{$checkOutDate->day} {$checkOutDate->getTranslatedMonthName()} {$checkOutDate->year}";
+                return $checkOut;
+            });
         return view('dashboard.pages.report.check-out', compact('checkOuts'));
     }
 

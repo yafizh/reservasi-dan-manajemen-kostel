@@ -25,11 +25,11 @@ class PrintController extends Controller
         $employees = Employee::orderBy('name', 'DESC')->get()->map(function ($employee) use ($request, &$filters) {
             $employeeServices = $employee->employeeServices();
 
-            if ($request->get('from') && $request->get('to')){
+            if ($request->get('from') && $request->get('to')) {
                 $employeeServices = $employee->employeeServices($request->get('from'), $request->get('to'));
                 $from = Carbon::create($request->get('from'))->locale('ID');
                 $to = Carbon::create($request->get('to'))->locale('ID');
-    
+
                 $filters['from'] = "{$from->day} {$from->getTranslatedMonthName()} {$from->year}";
                 $filters['to'] = "{$to->day} {$to->getTranslatedMonthName()} {$to->year}";
             }
@@ -59,7 +59,15 @@ class PrintController extends Controller
             $filters['to'] = "{$to->day} {$to->getTranslatedMonthName()} {$to->year}";
         }
 
-        $reservations = $query->get();
+        $reservations = $query
+            ->get()
+            ->map(function ($reservation) {
+                $reservationDate = Carbon::create($reservation->reservation_datetime)->locale('ID');
+                $checkInDate = Carbon::create($reservation->check_in_date)->locale('ID');
+                $reservation->reservation_date = "{$reservationDate->day} {$reservationDate->getTranslatedMonthName()} {$reservationDate->year}";
+                $reservation->check_in_date = "{$checkInDate->day} {$checkInDate->getTranslatedMonthName()} {$checkInDate->year}";
+                return $reservation;
+            });
         return view('dashboard.pages.print.reservation', compact('reservations', 'filters'));
     }
 
@@ -79,7 +87,13 @@ class PrintController extends Controller
             $filters['to'] = "{$to->day} {$to->getTranslatedMonthName()} {$to->year}";
         }
 
-        $checkIns = $query->get();
+        $checkIns = $query
+            ->get()
+            ->map(function ($checkIn) {
+                $checkInDate = Carbon::create($checkIn->check_in_datetime)->locale('ID');
+                $checkIn->check_in_date = "{$checkInDate->day} {$checkInDate->getTranslatedMonthName()} {$checkInDate->year}";
+                return $checkIn;
+            });
         return view('dashboard.pages.print.check-in', compact('checkIns', 'filters'));
     }
 
@@ -99,7 +113,13 @@ class PrintController extends Controller
             $filters['to'] = "{$to->day} {$to->getTranslatedMonthName()} {$to->year}";
         }
 
-        $checkOuts = $query->get();
+        $checkOuts = $query
+            ->get()
+            ->map(function ($checkOut) {
+                $checkOutDate = Carbon::create($checkOut->check_out_datetime)->locale('ID');
+                $checkOut->check_out_date = "{$checkOutDate->day} {$checkOutDate->getTranslatedMonthName()} {$checkOutDate->year}";
+                return $checkOut;
+            });
         return view('dashboard.pages.print.check-out', compact('checkOuts', 'filters'));
     }
 

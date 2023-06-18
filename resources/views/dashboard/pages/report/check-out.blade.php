@@ -68,10 +68,10 @@
                                     @foreach ($checkOuts as $checkOut)
                                         <tr>
                                             <td class="text-center">{{ $loop->iteration }}</td>
-                                            <td class="text-center">{{ $checkOut->check_in_date }}</td>
-                                            <td class="text-center">Kamar Nomor {{ $checkOut->room->number }}</td>
-                                            <td class="text-center">{{ $checkOut->id_number }}</td>
-                                            <td class="text-center">{{ $checkOut->name }}</td>
+                                            <td class="text-center">{{ $checkOut->check_out_date }}</td>
+                                            <td class="text-center">Kamar Nomor {{ $checkOut->checkIn->room->number }}</td>
+                                            <td class="text-center">{{ $checkOut->checkIn->id_number }}</td>
+                                            <td class="text-center">{{ $checkOut->checkIn->name }}</td>
                                         </tr>
                                     @endforeach
                                 </tbody>
