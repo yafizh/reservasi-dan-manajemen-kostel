@@ -78,8 +78,8 @@
                             </div>
                             <div class="form-group">
                                 <label>Uang Muka</label>
-                                <input type="text" class="form-control" value="{{ $reservation->down_payment }}"
-                                    disabled>
+                                <input type="text" class="form-control"
+                                    value="{{ number_format($reservation->down_payment, 0, ',', '.') }}" disabled>
                             </div>
                             <div class="form-group">
                                 <label class="d-block">Status</label>

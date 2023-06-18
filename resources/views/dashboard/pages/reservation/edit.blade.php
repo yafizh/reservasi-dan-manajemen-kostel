@@ -78,7 +78,8 @@
                                 <div class="form-group">
                                     <label for="down_payment">Uang Muka</label>
                                     <input type="text" class="form-control" id="down_payment" name="down_payment"
-                                        required value="{{ old('down_payment', $reservation->down_payment) }}">
+                                        required
+                                        value="{{ number_format(old('down_payment', $reservation->down_payment), 0, ',', '.') }}">
                                 </div>
                             </div>
                         </div>
@@ -87,4 +88,16 @@
             </form>
         </div>
     </section>
+    <script>
+        document.querySelector('input[name=down_payment]').addEventListener("keypress", function(evt) {
+            if (evt.which < 48 || evt.which > 57) {
+                evt.preventDefault();
+                return;
+            }
+            this.addEventListener('input', function() {
+                const down_payment = Number(((this.value).split('.')).join(''));
+                this.value = formatNumberWithDot.format(down_payment);
+            });
+        });
+    </script>
 @endsection

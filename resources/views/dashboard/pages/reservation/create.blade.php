@@ -86,4 +86,16 @@
             </form>
         </div>
     </section>
+    <script>
+        document.querySelector('input[name=down_payment]').addEventListener("keypress", function(evt) {
+            if (evt.which < 48 || evt.which > 57) {
+                evt.preventDefault();
+                return;
+            }
+            this.addEventListener('input', function() {
+                const down_payment = Number(((this.value).split('.')).join(''));
+                this.value = formatNumberWithDot.format(down_payment);
+            });
+        });
+    </script>
 @endsection

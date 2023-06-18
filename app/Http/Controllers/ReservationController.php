@@ -44,6 +44,7 @@ class ReservationController extends Controller
             'down_payment'  => 'required',
         ]);
 
+        $validatedData['down_payment'] = implode('', explode('.', $validatedData['down_payment']));
         $validatedData['user_id'] = Auth::user()->id ?? null;
         $validatedData['reservation_datetime'] = Carbon::now()->setTimezone('Asia/Kuala_Lumpur')->toDateTimeLocalString();
         Reservation::create($validatedData);
@@ -77,6 +78,7 @@ class ReservationController extends Controller
             'down_payment'  => 'required',
         ]);
 
+        $validatedData['down_payment'] = implode('', explode('.', $validatedData['down_payment']));
         Reservation::where('id', $reservation->id)->update($validatedData);
 
         return redirect('/reservations')->with('success', 'Berhasil memperbaharui data pemesanan!');
