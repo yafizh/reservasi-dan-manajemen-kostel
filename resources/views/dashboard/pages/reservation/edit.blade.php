@@ -27,6 +27,13 @@
                         @endif
                     </div>
                     <div class="col-12 col-md-6">
+                        <div class="d-flex justify-content-center">
+                            <img id="room-image"
+                                src="{{ is_null($reservation->room->roomType->images) ? asset('placeholder_room.png') : asset('storage/' . $reservation->room->roomType->images[0]->filename) }}"
+                                class="img-thumbnail mb-3" style="width: 100%; height: 20rem; object-fit: contain;">
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-6">
                         <div class="card">
                             <div class="card-body">
                                 <div class="form-group">
@@ -45,14 +52,7 @@
                                         required value="{{ old('phone_number', $reservation->phone_number) }}">
                                 </div>
                             </div>
-
-                            <div class="card-footer">
-                                <a href="/{{ request()->segment(1) }}" class="btn btn-secondary float-left">Kembali</a>
-                                <button type="submit" class="btn btn-primary float-right">Perbaharui</button>
-                            </div>
                         </div>
-                    </div>
-                    <div class="col-12 col-md-6">
                         <div class="card">
                             <div class="card-body">
                                 <div class="form-group">
@@ -60,7 +60,8 @@
                                     <select class="form-control" name="room_id" id="room_id" required>
                                         <option value="" disabled selected>Pilih Kamar</option>
                                         @foreach ($roomTypes as $roomType)
-                                            <optgroup label="{{ $roomType->name }}">
+                                            <optgroup label="{{ $roomType->name }}"
+                                                data-image="{{ is_null($roomType->images) ? '' : asset('storage/' . $roomType->images[0]->filename) }}">
                                                 @foreach ($roomType->availableRooms as $room)
                                                     <option value="{{ $room->id }}" @selected(old('room_id', $reservation->room_id) == $room->id)>
                                                         Kamar Nomor {{ $room->number }} | Lantai {{ $room->floor }}
@@ -82,6 +83,10 @@
                                         value="{{ number_format(old('down_payment', $reservation->down_payment), 0, ',', '.') }}">
                                 </div>
                             </div>
+                            <div class="card-footer">
+                                <a href="/{{ request()->segment(1) }}" class="btn btn-secondary float-left">Kembali</a>
+                                <button type="submit" class="btn btn-primary float-right">Perbaharui</button>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -98,6 +103,13 @@
                 const down_payment = Number(((this.value).split('.')).join(''));
                 this.value = formatNumberWithDot.format(down_payment);
             });
+        });
+    </script>
+    <script>
+        const roomImage = document.getElementById("room-image");
+        document.getElementById('room_id').addEventListener('change', function() {
+            console.log(this[this.selectedIndex].parentElement.getAttribute('data-image'))
+            roomImage.setAttribute('src', this[this.selectedIndex].parentElement.getAttribute('data-image'));
         });
     </script>
 @endsection

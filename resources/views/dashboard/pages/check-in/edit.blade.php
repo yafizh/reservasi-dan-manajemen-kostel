@@ -27,6 +27,11 @@
                         @endif
                     </div>
                     <div class="col-12 col-md-6">
+                        <div class="d-flex justify-content-center">
+                            <img id="room-image"
+                                src="{{ is_null($checkIn->room->roomType->images) ? asset('placeholder_room.png') : asset('storage/' . $checkIn->room->roomType->images[0]->filename) }}"
+                                class="img-thumbnail mb-3" style="width: 100%; height: 20rem; object-fit: contain;">
+                        </div>
                         <div class="card">
                             <div class="card-body">
                                 <div class="form-group">
@@ -61,7 +66,7 @@
                                         <option value="" disabled selected>Pilih Kamar</option>
                                         @foreach ($roomTypes as $roomType)
                                             <optgroup label="{{ $roomType->name }}"
-                                                data-price_monthly="{{ $roomType->prices }}">
+                                                data-image="{{ is_null($roomType->images) ? '' : asset('storage/' . $roomType->images[0]->filename) }}">
                                                 @foreach ($roomType->availableRooms as $room)
                                                     <option value="{{ $room->id }}" @selected(old('room_id', $checkIn->room->id) == $room->id)>
                                                         {{ $roomType->name }} | Kamar Nomor {{ $room->number }} | Lantai
@@ -121,4 +126,11 @@
             </form>
         </div>
     </section>
+    <script>
+        const roomImage = document.getElementById("room-image");
+        document.getElementById('room_id').addEventListener('change', function() {
+            console.log(this[this.selectedIndex].parentElement.getAttribute('data-image'))
+            roomImage.setAttribute('src', this[this.selectedIndex].parentElement.getAttribute('data-image'));
+        });
+    </script>
 @endsection

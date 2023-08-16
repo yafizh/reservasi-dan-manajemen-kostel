@@ -26,6 +26,10 @@
                         @endif
                     </div>
                     <div class="col-12 col-md-6">
+                        <div class="d-flex justify-content-center">
+                            <img id="room-image" src="{{ asset('placeholder_room.png') }}" class="img-thumbnail mb-3"
+                                style="width: 100%; height: 20rem; object-fit: contain;">
+                        </div>
                         <div class="card">
                             <div class="card-body">
                                 <div class="form-group">
@@ -63,7 +67,7 @@
                                         <option value="" disabled selected>Pilih Kamar</option>
                                         @foreach ($roomTypes as $roomType)
                                             <optgroup label="{{ $roomType->name }}"
-                                                data-price_monthly="{{ $roomType->prices }}">
+                                                data-image="{{ is_null($roomType->images) ? '' : asset('storage/' . $roomType->images[0]->filename) }}">
                                                 @foreach ($roomType->availableRooms as $room)
                                                     <option value="{{ $room->id }}" @selected(old('room_id', $reservation->room->id ?? '') == $room->id)>
                                                         {{ $roomType->name }} | Kamar Nomor {{ $room->number }} | Lantai
@@ -76,7 +80,8 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="reservation_type_id">Jenis Penyewaan</label>
-                                    <select class="form-control" name="reservation_type_id" id="reservation_type_id" required>
+                                    <select class="form-control" name="reservation_type_id" id="reservation_type_id"
+                                        required>
                                         <option value="" disabled selected>Pilih Jenis Pembayaran</option>
                                         @foreach ($reservationTypes as $reservationType)
                                             <option value="{{ $reservationType->id }}">
@@ -122,4 +127,11 @@
             </form>
         </div>
     </section>
+    <script>
+        const roomImage = document.getElementById("room-image");
+        document.getElementById('room_id').addEventListener('change', function() {
+            console.log(this[this.selectedIndex].parentElement.getAttribute('data-image'))
+            roomImage.setAttribute('src', this[this.selectedIndex].parentElement.getAttribute('data-image'));
+        });
+    </script>
 @endsection

@@ -24,6 +24,11 @@
                     @endif
                 </div>
                 <div class="col-12 col-md-6">
+                    <div class="d-flex justify-content-center">
+                        <img id="room-image"
+                            src="{{ is_null($reservation->room->roomType->images) ? asset('placeholder_room.png') : asset('storage/' . $reservation->room->roomType->images[0]->filename) }}"
+                            class="img-thumbnail mb-3" style="width: 100%; height: 20rem; object-fit: contain;">
+                    </div>
                     <div class="card">
                         <div class="card-body">
                             <div class="form-group">
