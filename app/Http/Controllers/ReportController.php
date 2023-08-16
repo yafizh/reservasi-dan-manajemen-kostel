@@ -132,7 +132,7 @@ class ReportController extends Controller
         $chart = null;
         if ($request->get('quarter') && $request->get('year')) {
             $chart = new BarChart;
-            $query = Reservation::whereYear('reservation_datetime', $request->get('tahun'))->orderBy('reservation_datetime');
+            $query = Reservation::whereYear('reservation_datetime', $request->get('year'))->orderBy('reservation_datetime');
 
             if ($request->get('quarter') == 1) {
                 $query->where(function ($q) {
@@ -164,17 +164,17 @@ class ReportController extends Controller
 
             $dataset = [0, 0, 0];
             foreach ($query->get() as $value) {
-                if (in_array(explode('-', $value['tanggal'])[1], [1, 4, 7, 10]))
+                if (in_array(explode('-', $value['reservation_datetime'])[1], [1, 4, 7, 10]))
                     $dataset[0]++;
 
-                if (in_array(explode('-', $value['tanggal'])[1], [2, 5, 8, 11]))
+                if (in_array(explode('-', $value['reservation_datetime'])[1], [2, 5, 8, 11]))
                     $dataset[1]++;
 
-                if (in_array(explode('-', $value['tanggal'])[1], [3, 6, 9, 12]))
+                if (in_array(explode('-', $value['reservation_datetime'])[1], [3, 6, 9, 12]))
                     $dataset[2]++;
             }
 
-            $chart->dataset('Check In', 'bar', $dataset)->options([
+            $chart->dataset('Pemesanan', 'bar', $dataset)->options([
                 'backgroundColor' => '#204A40',
             ]);
             $chart->setStepSize(max($dataset), 8);
@@ -188,7 +188,7 @@ class ReportController extends Controller
         $chart = null;
         if ($request->get('quarter') && $request->get('year')) {
             $chart = new BarChart;
-            $query = CheckIn::whereYear('check_in_datetime', $request->get('tahun'))->orderBy('check_in_datetime');
+            $query = CheckIn::whereYear('check_in_datetime', $request->get('year'))->orderBy('check_in_datetime');
 
             if ($request->get('quarter') == 1) {
                 $query->where(function ($q) {
@@ -220,13 +220,13 @@ class ReportController extends Controller
 
             $dataset = [0, 0, 0];
             foreach ($query->get() as $value) {
-                if (in_array(explode('-', $value['tanggal'])[1], [1, 4, 7, 10]))
+                if (in_array(explode('-', $value['check_in_datetime'])[1], [1, 4, 7, 10]))
                     $dataset[0]++;
 
-                if (in_array(explode('-', $value['tanggal'])[1], [2, 5, 8, 11]))
+                if (in_array(explode('-', $value['check_in_datetime'])[1], [2, 5, 8, 11]))
                     $dataset[1]++;
 
-                if (in_array(explode('-', $value['tanggal'])[1], [3, 6, 9, 12]))
+                if (in_array(explode('-', $value['check_in_datetime'])[1], [3, 6, 9, 12]))
                     $dataset[2]++;
             }
 

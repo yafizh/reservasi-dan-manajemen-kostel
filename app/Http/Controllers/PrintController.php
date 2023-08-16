@@ -203,13 +203,13 @@ class PrintController extends Controller
 
         $dataset = [0, 0, 0];
         foreach ($query->get() as $value) {
-            if (in_array(explode('-', $value['tanggal'])[1], [1, 4, 7, 10]))
+            if (in_array(explode('-', $value['check_in_datetime'])[1], [1, 4, 7, 10]))
                 $dataset[0]++;
 
-            if (in_array(explode('-', $value['tanggal'])[1], [2, 5, 8, 11]))
+            if (in_array(explode('-', $value['check_in_datetime'])[1], [2, 5, 8, 11]))
                 $dataset[1]++;
 
-            if (in_array(explode('-', $value['tanggal'])[1], [3, 6, 9, 12]))
+            if (in_array(explode('-', $value['check_in_datetime'])[1], [3, 6, 9, 12]))
                 $dataset[2]++;
         }
 
@@ -264,13 +264,13 @@ class PrintController extends Controller
 
         $dataset = [0, 0, 0];
         foreach ($query->get() as $value) {
-            if (in_array(explode('-', $value['tanggal'])[1], [1, 4, 7, 10]))
+            if (in_array(explode('-', $value['reservation_datetime'])[1], [1, 4, 7, 10]))
                 $dataset[0]++;
 
-            if (in_array(explode('-', $value['tanggal'])[1], [2, 5, 8, 11]))
+            if (in_array(explode('-', $value['reservation_datetime'])[1], [2, 5, 8, 11]))
                 $dataset[1]++;
 
-            if (in_array(explode('-', $value['tanggal'])[1], [3, 6, 9, 12]))
+            if (in_array(explode('-', $value['reservation_datetime'])[1], [3, 6, 9, 12]))
                 $dataset[2]++;
         }
 
