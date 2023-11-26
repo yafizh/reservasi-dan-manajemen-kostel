@@ -281,4 +281,30 @@ class PrintController extends Controller
 
         return view('dashboard.pages.print.reservation-chart', compact('chart', 'filters'));
     }
+
+    public function finance(Request $request)
+    {
+        $filters = [];
+        $query = CheckIn::orderBy('created_at', 'DESC');
+
+        if ($request->get('from') && $request->get('to')) {
+            $query->whereRaw('DATE(check_in_datetime) = ' . $request->get('from'))
+                ->whereRaw('DATE(check_in_datetime) = ' . $request->get('to'));
+
+            $from = Carbon::create($request->get('from'))->locale('ID');
+            $to = Carbon::create($request->get('to'))->locale('ID');
+
+            $filters['from'] = "{$from->day} {$from->getTranslatedMonthName()} {$from->year}";
+            $filters['to'] = "{$to->day} {$to->getTranslatedMonthName()} {$to->year}";
+        }
+
+        $finances = $query
+            ->get()
+            ->map(function ($checkIn) {
+                $checkInDate = Carbon::create($checkIn->check_in_datetime)->locale('ID');
+                $checkIn->check_in_date = "{$checkInDate->day} {$checkInDate->getTranslatedMonthName()} {$checkInDate->year}";
+                return $checkIn;
+            });
+        return view('dashboard.pages.print.finance', compact('finances', 'filters'));
+    }
 }

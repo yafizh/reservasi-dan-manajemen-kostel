@@ -238,4 +238,23 @@ class ReportController extends Controller
 
         return view('dashboard.pages.report.check-in-chart', compact('chart'));
     }
+
+    public function finance(Request $request)
+    {
+        $query = CheckIn::orderBy('created_at', 'DESC');
+
+        if ($request->get('from') && $request->get('to')) {
+            $query->whereRaw('DATE(check_in_datetime) >= ' . $request->get('from'))
+                ->whereRaw('DATE(check_in_datetime) <= ' . $request->get('to'));
+        }
+
+        $finances = $query
+            ->get()
+            ->map(function ($checkIn) {
+                $checkInDate = Carbon::create($checkIn->check_in_datetime)->locale('ID');
+                $checkIn->check_in_date = "{$checkInDate->day} {$checkInDate->getTranslatedMonthName()} {$checkInDate->year}";
+                return $checkIn;
+            });
+        return view('dashboard.pages.report.finance', compact('finances'));
+    }
 }

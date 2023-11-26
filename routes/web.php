@@ -74,6 +74,9 @@ Route::middleware(IsLogin::class)->group(function () {
 
         Route::get('/employee-services', 'employeeService');
         Route::post('/employee-services', 'employeeService');
+
+        Route::get('/finances', 'finance');
+        Route::post('/finances', 'finance');
     });
 
     Route::prefix('/print')->controller(PrintController::class)->group(function () {
@@ -85,5 +88,6 @@ Route::middleware(IsLogin::class)->group(function () {
         Route::get('/available-rooms', 'availableRoom');
         Route::get('/check-ins-chart', 'checkInChart');
         Route::get('/reservations-chart', 'reservationChart');
+        Route::get('/finances', 'finance');
     });
 });
