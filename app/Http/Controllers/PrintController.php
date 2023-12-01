@@ -305,6 +305,12 @@ class PrintController extends Controller
                 $checkIn->check_in_date = "{$checkInDate->day} {$checkInDate->getTranslatedMonthName()} {$checkInDate->year}";
                 return $checkIn;
             });
-        return view('dashboard.pages.print.finance', compact('finances', 'filters'));
+
+        $total = 0;
+        foreach ($finances as $finance) {
+            $total += $finance->price();
+        }
+
+        return view('dashboard.pages.print.finance', compact('finances', 'filters', 'total'));
     }
 }

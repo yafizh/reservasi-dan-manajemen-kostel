@@ -116,4 +116,31 @@ class CheckInController extends Controller
 
         return redirect('/check-ins')->with('success', 'Berhasil menghapus data check in!');
     }
+
+    public function receipt(CheckIn $checkIn)
+    {
+        $today = Carbon::now('Asia/Kuala_Lumpur')->locale('ID');
+        $checkInDate = Carbon::create($checkIn->check_in_datetime)->locale('ID');
+
+        $period = "{$checkInDate->day} {$checkInDate->getTranslatedMonthName()} {$checkInDate->year}";
+        $checkOutDate = Carbon::create($checkIn->check_in_datetime)->locale('ID');
+
+        switch ($checkIn->reservationType->name) {
+            case 1:
+                $checkOutDate->addMonth();
+                break;
+            case 2:
+                $checkOutDate->addWeek();
+                break;
+            case 3:
+                $checkOutDate->addDay();
+                break;
+            case 4:
+                $checkOutDate->addDay();
+                break;
+        }
+        $period .= " - {$checkOutDate->day} {$checkOutDate->getTranslatedMonthName()} {$checkOutDate->year}";
+
+        return view('dashboard.pages.check-in.receipt', compact('checkIn', 'period', 'today'));
+    }
 }

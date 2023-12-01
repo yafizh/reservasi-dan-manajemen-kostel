@@ -86,7 +86,10 @@
                                 @endif
                             </div>
                         </div>
-                        <div class="card-footer">
+                        <div class="card-footer d-flex justify-content-end">
+                            <a href="/check-ins/{{ $checkIn->id }}/receipt" class="btn btn-info mr-2" target="_blank">Nota
+                                Pembayaran
+                            </a>
                             <form action="/check-outs/{{ $checkIn->id }}" method="POST">
                                 @csrf
                                 <button type="submit" class="btn btn-success float-right mr-1">

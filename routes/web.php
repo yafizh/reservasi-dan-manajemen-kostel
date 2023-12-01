@@ -30,6 +30,8 @@ Route::controller(LoginController::class)->group(function () {
 Route::middleware(IsLogin::class)->group(function () {
     Route::resource('/admin', AdminController::class);
     Route::resource('/employees', EmployeeController::class);
+
+    Route::get('/check-ins/{checkIn}/receipt', [CheckInController::class, 'receipt']);
     Route::resource('/check-ins', CheckInController::class);
 
     Route::prefix('check-outs')->controller(CheckOutController::class)->group(function () {

@@ -41,6 +41,10 @@
                             <td class="text-center align-middle">{{ $finance->price() }}</td>
                         </tr>
                     @endforeach
+                    <tr>
+                        <td colspan="4"><strong>Total</strong></td>
+                        <td class="text-center align-middle">{{ $total }}</td>
+                    </tr>
                 @else
                     <tr>
                         <td colspan="5" class="text-center">Data Kosong</td>
