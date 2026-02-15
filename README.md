@@ -1,4 +1,4 @@
-# Reservasi dan Manajemen Kostel
+# Kostel Reservation & Operations Platform
 
 A web-based application for managing "Kostel" (Boarding House/Hotel) reservations, rooms, and daily operations. Built with Laravel 9, this system streamlines the process of checking in guests, managing room availability, and generating financial and operational reports.
 
